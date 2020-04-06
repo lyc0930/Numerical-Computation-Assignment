@@ -1,0 +1,67 @@
+\documentclass[11pt]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{diagbox}
+
+\setlist{
+    leftmargin = .1\linewidth,
+    % rightmargin = .1\linewidth,
+    % label=\emph{\alph*}.
+}
+
+\input{../structure.tex} % Include the file specifying the document structure and custom commands
+
+
+\newcommand{\assignmentQuestionName}{Question} % The word to be used as a prefix to question numbers; example alternatives: Problem, Exercise
+\newcommand{\assignmentClass}{计算方法B} % Course/class
+\newcommand{\assignmentTitle}{Programming Assignment\ \#2} % Assignment title or name
+\newcommand{\assignmentDate}{2020.4.6} % date
+\newcommand{\assignmentNo}{PB17000297}
+\newcommand{\assignmentAuthorName}{罗晏宸} % Student name
+
+\begin{document}
+
+\maketitle % Print the title page
+
+\thispagestyle{empty} % Suppress headers and footers on the title page
+
+\newpage
+
+\assignmentSection{Question 1}
+\section{问题描述}
+对函数$\displaystyle f(x) = \frac{1}{2 + 2x + x^2},\ x \in [-5, 5]$，构造其$N$次 Lagrange 插值函数，取
+\begin{equation*}
+    \max_{-5 \leqslant x \leqslant 5}{\left \Arrowvert f(x) - p(x)\right \Arrowvert } \approx \max_i{\left\arrowvert f(y_i) - p(y_i)\right\arrowvert},\ y_i = \dfrac{i}{50} - 5,\ i = 0,\, \cdots,\, 500
+\end{equation*}
+为近似误差。其中，插值结点（设有$N + 1$个）取为：
+\begin{enumerate}[label = (\arabic*)]
+    \item $x_i = -5 + \dfrac{10}{N}i,\, i = 0,\,1,\,\cdots,\,N$
+    \item $x_i = -5\cos{\left(\dfrac{2i + 1}{2N + 2}\pi\right)},\, i = 0,\,1,\,\cdots,\,N$
+\end{enumerate}
+对$N = 4,\ 8,\ 16$比较以上两组结点的插值结果。
+
+\section{计算结果}
+由C++计算得到结果按格式输出如下：
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale = 0.35]{Output.png}
+\end{figure}
+其中数据可列如下表：
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline
+        \diagbox{插值结点}{近似误差}{} & Mon  & Tue  & Wed  \\
+        \hline Morning                 & used & used &      \\
+        Afternoon                      &      & used & used \\
+        \hline
+    \end{tabular}
+\end{table}
+\section{结果分析}
+
+\section{算法分析}
+
+
+\section{实验结论}
+\end{document}
