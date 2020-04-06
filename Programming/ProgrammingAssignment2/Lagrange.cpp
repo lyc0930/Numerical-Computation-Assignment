@@ -30,7 +30,7 @@ public:
 
 double f(double x)
 {
-    return 1.0 / (2 + 2 * x + pow(x, 2));
+    return 1.0 / (2.0 + 2.0 * x + pow(x, 2));
 }
 
 point *Linear(int n)
@@ -51,7 +51,7 @@ point *Chebyshev(int n)
     Nodes = new point[n + 1];
     for (int i = 0; i <= n; i++)
     {
-        Nodes[i].x = -5.0 * cos((2.0 * i + 1) * M_PI / (2.0 * n + 2.0));
+        Nodes[i].x = -5.0 * cos((2.0 * i + 1.0) * M_PI / (2.0 * n + 2.0));
         Nodes[i].y = f(Nodes[i].x);
     }
     return Nodes;
@@ -60,15 +60,15 @@ point *Chebyshev(int n)
 double Lagrange(point Nodes[], int n, double x)
 {
     double estimator = 0;
-    for (int j = 0; j <= n; j++)
+    for (int i = 0; i <= n; i++)
     {
-        double p = 1.0;
-        for (int i = 0; i <= n; i++)
+        double l = 1.0;
+        for (int j = 0; j <= n; j++)
         {
-            if (i != j)
-                p *= (x - Nodes[i].x) / (Nodes[j].x - Nodes[i].x);
+            if (j != i)
+                l *= (x - Nodes[j].x) / (Nodes[i].x - Nodes[j].x);
         }
-        estimator += Nodes[j].y * p;
+        estimator += Nodes[i].y * l;
     }
     return estimator;
 }
@@ -81,19 +81,16 @@ int main()
     {
         for (int n : N)
         {
-            double error;
-            double maximum;
+            double error = 0.0;
+            double maximum = 0.0;
             for (int i = 0; i <= 500; i++)
             {
-                double y = -5.0 + 10.0 * i / 500.0;
+                double y = -5.0 + (double)i / 50.0;
                 error = fabs(f(y) - Lagrange(NodeGenerator(n), n, y));
                 if (error > maximum)
-                {
-                    cout << y << endl;
                     maximum = error;
-                }
             }
-            printf("n = %2d , %.12E\n", n, error);
+            printf("n = %2d , %.12E\n", n, maximum);
         }
     }
     return 0;

@@ -50,11 +50,12 @@
 其中数据可列如下表：
 \begin{table}[h]
     \centering
-    \begin{tabular}{|l|c|c|}
+    \begin{tabular}{|c|c|c|}
         \hline
-        \diagbox{插值结点}{近似误差}{} & Mon  & Tue  & Wed  \\
-        \hline Morning                 & used & used &      \\
-        Afternoon                      &      & used & used \\
+        \diagbox{插值结点数}{近似误差}{结点选取} & 均匀                         & Chebyshev                    \\
+        \hline $N = 4$                           & $5.003328739308\text{E}-001$ & $5.184755856153\text{E}-001$ \\
+        \hline $N = 8$                           & $9.330226091782\text{E}-001$ & $3.023029262570\text{E}-001$ \\
+        \hline $N = 16$                          & $4.036628088374\text{E}+000$ & $3.683369183311\text{E}-002$ \\
         \hline
     \end{tabular}
 \end{table}
