@@ -76,7 +76,13 @@
 	\begin{equation*}
 		y = \varphi(x) = 1.959 \times e^{1.028x}
 	\end{equation*}
+	误差平方和
+	\begin{align*}
+		\hat{Q} & = \sum_{i = 1}^4{(0.672 + 1.028x_i - \hat{y}_i)^2} \approx 0.007467                 \\
+		Q       & = \sum_{i = 1}^4{(1.959 \times e^{1.028x_i} - y_i)^2}              \approx 0.010715
+	\end{align*}
 	}
+
 \end{question}
 
 \begin{question}
@@ -195,6 +201,10 @@
 			\end{aligned}
 			\right.
 		\end{equation*}
+		误差平方和
+		\begin{equation*}
+			Q(X) = \Arrowvert AX - Y \Arrowvert^2_2 \approx 28.0045
+		\end{equation*}
 	}
 \end{question}
 
@@ -244,6 +254,10 @@
 		\end{equation*}
 		\begin{equation*}
 			p(2015) = 36662597.000 - 36981.243 \times 2015 + 9.357 \times 2015^2 \approx 137498.0
+		\end{equation*}
+		误差平方和
+		\begin{equation*}
+			Q = \sum_{i = 1}^5{(36662597.000 - 36981.243 x_i + 9.357 x_i^2 - y_i)^2} \approx 96.9143
 		\end{equation*}
 	}
 
