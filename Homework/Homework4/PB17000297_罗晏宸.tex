@@ -34,7 +34,24 @@
 	}
 
 	\answer{
+	$\displaystyle Q(a,b) = \sum_{i = 1}^4{(ae^{bx_i} - y_i)^2}$的最值点不容易求得。为此，我们首先对数据作预处理，令$\hat{y}_i = \ln{y_i}$，然后对$(x_i, \hat{y}_i),\ i = 1, 2, 3, 4$作形如$\ln{\varphi(x)} = \ln{a} + bx$的线性拟合。即求$c_0 = \ln{a},\ c_1 = b$使得$\displaystyle \hat{Q}(c_0, c_1) = \sum_{i = 1}^4{(c_0 + c_1x_i - \hat{y}_i)^2}$达到最小值。
 
+	相应的法方程为
+	\begin{equation*}
+		\begin{pmatrix}
+			4 & 2 \\
+			3 & 1
+		\end{pmatrix}
+		\begin{pmatrix}
+			c_0 \\
+			c_1
+		\end{pmatrix}
+		=
+		\begin{pmatrix}
+			a \\
+			b
+		\end{pmatrix}
+	\end{equation*}
 	}
 \end{question}
 

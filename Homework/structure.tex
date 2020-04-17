@@ -33,6 +33,14 @@
 \usepackage{etoolbox} % Required for if statements
 
 \usepackage{amsmath}
+
+% ???????????
+\makeatletter
+\renewenvironment{pmatrix}
+{\left(\mkern10.0mu\env@matrix}
+{\endmatrix\mkern10.0mu\right)}
+\makeatother
+
 \usepackage{amsthm}
 \usepackage{amssymb}
 %----------------------------------------------------------------------------------------
