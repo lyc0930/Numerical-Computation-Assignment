@@ -34,11 +34,16 @@
 
 \usepackage{amsmath}
 
-% ???????????
+% 增加矩阵两侧括号内侧的空白，新建附参数arraystretch的matrix命令族
 \makeatletter
 \renewenvironment{pmatrix}
 {\left(\mkern10.0mu\env@matrix}
 {\endmatrix\mkern10.0mu\right)}
+\renewcommand*\env@matrix[1][\arraystretch]{%
+	\edef\arraystretch{#1}%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{*\c@MaxMatrixCols c}}
 \makeatother
 
 \usepackage{amsthm}

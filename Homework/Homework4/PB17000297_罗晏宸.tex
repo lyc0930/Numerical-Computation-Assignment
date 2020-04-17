@@ -35,22 +35,46 @@
 
 	\answer{
 	$\displaystyle Q(a,b) = \sum_{i = 1}^4{(ae^{bx_i} - y_i)^2}$的最值点不容易求得。为此，我们首先对数据作预处理，令$\hat{y}_i = \ln{y_i}$，然后对$(x_i, \hat{y}_i),\ i = 1, 2, 3, 4$作形如$\ln{\varphi(x)} = \ln{a} + bx$的线性拟合。即求$c_0 = \ln{a},\ c_1 = b$使得$\displaystyle \hat{Q}(c_0, c_1) = \sum_{i = 1}^4{(c_0 + c_1x_i - \hat{y}_i)^2}$达到最小值。
-
+	\begin{center}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			$x_i$       & $-0.60$ & $-0.50$ & $0.25$  & $0.75$  \\ \hline
+			$y_i$       & $1.00$  & $1.25$  & $2.50$  & $4.25$  \\ \hline
+			$\hat{y}_i$ & $0.000$ & $0.223$ & $0.916$ & $1.447$ \\ \hline
+		\end{tabular}
+	\end{center}
 	相应的法方程为
-	\begin{equation*}
-		\begin{pmatrix}
-			4 & 2 \\
-			3 & 1
+	\begin{align*}
+		                          &   & \begin{pmatrix}
+			4     & -0.10 \\
+			-0.10 & 1.235
 		\end{pmatrix}
 		\begin{pmatrix}
 			c_0 \\
 			c_1
 		\end{pmatrix}
-		=
+		                          & =
 		\begin{pmatrix}
-			a \\
-			b
+			2.586 \\
+			1.203
+		\end{pmatrix} &                               \\
+		\Rightarrow               &   & \begin{pmatrix}
+			c_0 \\
+			c_1
 		\end{pmatrix}
+		                          & =
+		\begin{pmatrix}
+			0.672 \\
+			1.028
+		\end{pmatrix} &
+	\end{align*}
+	\begin{align*}
+		a & = e^{c_0} = 1.959, \\
+		b & = c_1 = 1.028
+	\end{align*}
+	得到形如$y = ae^{bx}$的经验公式
+	\begin{equation*}
+		y = \varphi(x) = 1.959 \times e^{1.028x}
 	\end{equation*}
 	}
 \end{question}
@@ -72,6 +96,105 @@
 	}
 
 	\answer{
+		将矛盾方程组写成矩阵相乘的形式
+		\begin{equation*}
+			\begin{pmatrix}
+				1 & -2 \\
+				1 & 6  \\
+				3 & 1  \\
+				1 & 1
+			\end{pmatrix}
+			\begin{pmatrix}
+				x_1 \\
+				x_2
+			\end{pmatrix}
+			=
+			\begin{pmatrix}
+				4   \\
+				14  \\
+				7.5 \\
+				4.5
+			\end{pmatrix}
+		\end{equation*}
+		记
+		$$
+			A = \begin{pmatrix}
+				1 & -2 \\
+				1 & 6  \\
+				3 & 1  \\
+				1 & 1
+			\end{pmatrix},
+			X = \begin{pmatrix}
+				x_1 \\
+				x_2
+			\end{pmatrix},
+			Y = \begin{pmatrix}
+				4   \\
+				14  \\
+				7.5 \\
+				4.5
+			\end{pmatrix}
+		$$
+		由定理可知，矛盾方程组$AX = Y$的最小二乘解$X$使得$\Arrowvert AX - Y \Arrowvert_2$取最小值，同时满足
+		\begin{align*}
+			            &   & A^\mathsf{T} A X           & = A^\mathsf{T}Y \\
+			\Rightarrow &   & \begin{pmatrix}
+				1  & 1 & 3 & 1 \\
+				-2 & 6 & 1 & 1
+			\end{pmatrix}
+			\begin{pmatrix}
+				1 & -2 \\
+				1 & 6  \\
+				3 & 1  \\
+				1 & 1
+			\end{pmatrix}
+			\begin{pmatrix}
+				x_1 \\
+				x_2
+			\end{pmatrix}
+			            & =
+			\begin{pmatrix}
+				1  & 1 & 3 & 1 \\
+				-2 & 6 & 1 & 1
+			\end{pmatrix}
+			\begin{pmatrix}
+				4   \\
+				14  \\
+				7.5 \\
+				4.5
+			\end{pmatrix}                                     \\
+			\Rightarrow &   & \begin{pmatrix}
+				12 & 8  \\
+				8  & 42
+			\end{pmatrix}
+			\begin{pmatrix}
+				x_1 \\
+				x_2
+			\end{pmatrix}
+			            & =
+			\begin{pmatrix}
+				45.0 \\
+				88.0
+			\end{pmatrix}                                     \\
+			\Rightarrow &   & \begin{pmatrix}
+				x_1 \\
+				x_2
+			\end{pmatrix}
+			            & =
+			\begin{pmatrix}
+				2.695 \\
+				1.582
+			\end{pmatrix}
+		\end{align*}
+		因此题设矛盾方程组有最小二乘解
+		\begin{equation*}
+			\left\{
+			\begin{aligned}
+				x_1 & = 2.695 \\
+				x_2 & = 1.582
+			\end{aligned}
+			\right.
+		\end{equation*}
 	}
 \end{question}
 
@@ -88,6 +211,34 @@
 		\end{table}
 	}
 	\answer{
+		题设数据二次多项式拟合的法方程为
+		\begin{align*}
+			            &                              & \begin{pmatrix}
+				5        & 10060       & 20240730       \\
+				10060    & 20240730    & 40724389000    \\
+				20240730 & 40724389000 & 81937592112354
+			\end{pmatrix}
+			\begin{pmatrix}
+				a_0 \\
+				a_1 \\
+				a_2
+			\end{pmatrix}
+			            & = \begin{pmatrix}
+				677084     \\
+				1362299727 \\
+				2740961923651
+			\end{pmatrix}                              \\
+			\Rightarrow &                              & \begin{pmatrix}[1.5]
+				a_0 \\
+				a_1 \\
+				a_2
+			\end{pmatrix}
+			            & = \begin{pmatrix}[1.5]
+				36662597             \\
+				-\dfrac{2588687}{70} \\
+				\dfrac{131}{14}
+			\end{pmatrix}
+		\end{align*}
 	}
 
 \end{question}
