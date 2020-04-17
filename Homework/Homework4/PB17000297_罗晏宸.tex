@@ -211,7 +211,7 @@
 		\end{table}
 	}
 	\answer{
-		题设数据二次多项式拟合的法方程为
+		设$p(x) = a_0 + a_1x + a_2x^2$，题设数据二次多项式拟合的法方程为
 		\begin{align*}
 			            &                              & \begin{pmatrix}
 				5        & 10060       & 20240730       \\
@@ -228,17 +228,23 @@
 				1362299727 \\
 				2740961923651
 			\end{pmatrix}                              \\
-			\Rightarrow &                              & \begin{pmatrix}[1.5]
+			\Rightarrow &                              & \begin{pmatrix}[1.7]
 				a_0 \\
 				a_1 \\
 				a_2
 			\end{pmatrix}
-			            & = \begin{pmatrix}[1.5]
+			            & = \begin{pmatrix}[1.7]
 				36662597             \\
 				-\dfrac{2588687}{70} \\
 				\dfrac{131}{14}
 			\end{pmatrix}
 		\end{align*}
+		\begin{equation*}
+			p(x) \approx 36662597.000 - 36981.243 x + 9.357 x^2
+		\end{equation*}
+		\begin{equation*}
+			p(2015) = 36662597.000 - 36981.243 \times 2015 + 9.357 \times 2015^2 \approx 137498.0
+		\end{equation*}
 	}
 
 \end{question}
