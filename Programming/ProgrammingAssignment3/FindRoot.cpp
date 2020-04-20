@@ -25,11 +25,8 @@ vector<double> NewtonsMethod(function<double(double)> f, function<double(double)
 {
     auto phi = [f, f_Derivative](double x) -> double { return (x - f(x) / f_Derivative(x)); }; // phi(x) = x - f(x) / f'(x)
     vector<double> x = {x0};                                                                   // 迭代序列
-    while (fabs(phi(x.back()) - x.back()) >= epsilon)
-    {
+    while (fabs(f(x.back())) >= epsilon)
         x.push_back(phi(x.back()));
-    }
-    x.push_back(phi(x.back()));
     return x;
 }
 
@@ -38,11 +35,8 @@ vector<double> SecantMethod(function<double(double)> f, function<double(double)>
 {
     auto phi = [f, f_Derivative](double xk_1, double xk) -> double { return (xk - (f(xk) * (xk - xk_1)) / (f(xk) - f(xk_1))); }; // phi(x) = x - (f(x_k)(x_k - x_{k - 1}) / (f(x_k) - f(x_{k-1}))
     vector<double> x = {x0, x1};                                                                                                 // 迭代序列
-    x.push_back(phi(x0, x1));
-    while (fabs(x.at(x.size() - 2) - x.back()) >= epsilon)
-    {
+    while (fabs(f(x.back())) >= epsilon)
         x.push_back(phi(x.at(x.size() - 2), x.back()));
-    }
     return x;
 }
 
@@ -56,7 +50,7 @@ int main()
         for (double x0 : InitialValues)
         {
             vector<double> Recurrence = NewtonsMethod(f, f_Derivative, x0, epsilon);
-            printf("迭代步数：%d\n", Recurrence.size());
+            printf("迭代步数：%d\n", Recurrence.size() - 1);
             for (double x : Recurrence)
                 printf("%.10E\n", x);
         }
@@ -68,7 +62,7 @@ int main()
         for (pair<double, double> x_ : InitialValues)
         {
             vector<double> Recurrence = SecantMethod(f, f_Derivative, x_.first, x_.second, epsilon);
-            printf("迭代步数：%d\n", Recurrence.size());
+            printf("迭代步数：%d\n", Recurrence.size() - 1);
             for (double x : Recurrence)
                 printf("%.10E\n", x);
         }
