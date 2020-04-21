@@ -36,9 +36,30 @@
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{indentfirst}
+\usepackage{diagbox}
+\usepackage{subfigure}
+\usepackage{float}
 \usepackage{xcolor}
 \usepackage[colorlinks, linkcolor = black]{hyperref}
+
+\usepackage{enumerate}
+\usepackage{enumitem}
+\setlist{
+    leftmargin = .1\linewidth,
+    % rightmargin = .1\linewidth,
+    % label=\emph{\alph*}.
+}
+
 \setlength{\parindent}{2em}
+
+\usepackage{siunitx}
+\sisetup
+{
+    output-exponent-marker = \ensuremath{\mathrm{E}},
+    exponent-product = {},
+    retain-explicit-plus,
+    retain-zero-exponent,
+}
 %----------------------------------------------------------------------------------------
 %	MARGINS
 %----------------------------------------------------------------------------------------
