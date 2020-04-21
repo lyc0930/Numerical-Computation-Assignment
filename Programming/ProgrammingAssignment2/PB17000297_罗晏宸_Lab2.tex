@@ -1,6 +1,6 @@
 \documentclass[11pt]{article}
 \usepackage[UTF8]{ctex}
-
+\usepackage{subfigure}
 \input{../structure.tex} % Include the file specifying the document structure and custom commands
 
 
@@ -36,7 +36,7 @@
 由C++计算得到结果按格式输出如图\ref{Output}所示，
 \begin{figure}[H]
     \centering
-    \includegraphics[scale = 0.35]{Output.png}
+    \includegraphics[scale = 0.35]{Figure/Output.png}
     \caption{C++程序的运行结果}
     \label{Output}
 \end{figure}
@@ -58,27 +58,27 @@
 \begin{figure}[H]
     \centering
     \subfigure[$N = 4$时均匀插值结点构造的插值函数图像]{
-        \includegraphics[scale = 0.45]{Linear_N=4.pdf}
+        \includegraphics[scale = 0.45]{Figure/Linear_N=4.pdf}
     }
     \quad
     \subfigure[$N = 4$时Chebyshev插值结点构造的插值函数图像]{
-        \includegraphics[scale = 0.45]{Chebyshev_N=4.pdf}
+        \includegraphics[scale = 0.45]{Figure/Chebyshev_N=4.pdf}
     }
 
     \subfigure[$N = 8$时均匀插值结点构造的插值函数图像]{
-        \includegraphics[scale = 0.45]{Linear_N=8.pdf}
+        \includegraphics[scale = 0.45]{Figure/Linear_N=8.pdf}
     }
     \quad
     \subfigure[$N = 8$时Chebyshev插值结点构造的插值函数图像]{
-        \includegraphics[scale = 0.45]{Chebyshev_N=8.pdf}
+        \includegraphics[scale = 0.45]{Figure/Chebyshev_N=8.pdf}
     }
 
     \subfigure[$N = 16$时均匀插值结点构造的插值函数图像]{
-        \includegraphics[scale = 0.45]{Linear_N=16.pdf}
+        \includegraphics[scale = 0.45]{Figure/Linear_N=16.pdf}
     }
     \quad
     \subfigure[$N = 16$时Chebyshev插值结点构造的插值函数图像]{
-        \includegraphics[scale = 0.45]{Chebyshev_N=16.pdf}
+        \includegraphics[scale = 0.45]{Figure/Chebyshev_N=16.pdf}
     }
     \caption{$N = 4,\ 8,\ 16$时两组插值函数与$f(x)$的图像}
     \label{curves}
@@ -121,15 +121,15 @@ Lagrange 插值多项式的截断误差由下式给出：
 \begin{figure}[H]
     \centering
     \subfigure[$f^{(5)}(x)$的函数图像]{
-        \includegraphics[scale = 0.25]{5th_Derivative.pdf}
+        \includegraphics[scale = 0.25]{Figure/5th_Derivative.pdf}
     }
     \quad
     \subfigure[$f^{(9)}(x)$的函数图像]{
-        \includegraphics[scale = 0.25]{9th_Derivative.pdf}
+        \includegraphics[scale = 0.25]{Figure/9th_Derivative.pdf}
     }
 
     \subfigure[$f^{(17)}(x)$的函数图像]{
-        \includegraphics[scale = 0.25]{17th_Derivative.pdf}
+        \includegraphics[scale = 0.25]{Figure/17th_Derivative.pdf}
     }
     \caption{$f(x)$的各阶导函数图像}
     \label{Derivative_curves}
