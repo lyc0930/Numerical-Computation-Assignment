@@ -43,32 +43,6 @@ vector<double> SecantMethod(function<double(double)> f, function<double(double)>
 int main()
 {
     double epsilon = 1.0E-9;
-    // // Newton 法
-    // {
-    //     cout << "Newton 法" << endl;
-    //     vector<double> InitialValues = {0.0, 3.0}; // 初始值 x0
-    //     for (double x0 : InitialValues)
-    //     {
-    //         vector<double> Recurrence = NewtonsMethod(f, f_Derivative, x0, epsilon);
-    //         printf("迭代步数：%d\n", Recurrence.size() - 1);
-    //         for (double x : Recurrence)
-    //             printf("%.10E\n", x);
-    //     }
-    // }
-    // // 弦截法
-    // {
-    //     cout << "弦截法" << endl;
-    //     vector<pair<double, double>> InitialValues = {{0.0, 0.5}, {0.1, 1.5}}; // 初始值 (x0, x1)
-    //     for (pair<double, double> x_ : InitialValues)
-    //     {
-    //         vector<double> Recurrence = SecantMethod(f, f_Derivative, x_.first, x_.second, epsilon);
-    //         printf("迭代步数：%d\n", Recurrence.size() - 1);
-    //         for (double x : Recurrence)
-    //             printf("%.10E\n", x);
-    //     }
-    // }
-    // Output to LaTeX Table
-    // \hline $k = 0$  & $0.0000000000\text{E}{+}000$    & $1.0000000000\text{E}{+}000$ \\
     // Newton 法
     {
         cout << "Newton 法" << endl;
@@ -76,11 +50,9 @@ int main()
         for (double x0 : InitialValues)
         {
             vector<double> Recurrence = NewtonsMethod(f, f_Derivative, x0, epsilon);
-            int k = 0;
+            printf("迭代步数：%d\n", Recurrence.size() - 1);
             for (double x : Recurrence)
-            {
-                printf("\\hline $k = %d$ & $%.10E$ & $%.10E$ \\\\ \n", k++, x, f(x));
-            }
+                printf("%.10E\n", x);
         }
     }
     // 弦截法
@@ -90,11 +62,39 @@ int main()
         for (pair<double, double> x_ : InitialValues)
         {
             vector<double> Recurrence = SecantMethod(f, f_Derivative, x_.first, x_.second, epsilon);
-            int k = 0;
+            printf("迭代步数：%d\n", Recurrence.size() - 1);
             for (double x : Recurrence)
-            {
-                printf("\\hline $k = %d$ & $%.10E$ & $%.10E$ \\\\ \n", k++, x, f(x));
-            }
+                printf("%.10E\n", x);
         }
     }
+    // // Output to LaTeX Table
+    // // \hline $k = 0$  & $0.0000000000\text{E}{+}000$    & $1.0000000000\text{E}{+}000$ \\
+    // // Newton 法
+    // {
+    //     cout << "Newton 法" << endl;
+    //     vector<double> InitialValues = {0.0, 3.0}; // 初始值 x0
+    //     for (double x0 : InitialValues)
+    //     {
+    //         vector<double> Recurrence = NewtonsMethod(f, f_Derivative, x0, epsilon);
+    //         int k = 0;
+    //         for (double x : Recurrence)
+    //         {
+    //             printf("\\hline $k = %d$ & $%.10E$ & $%.10E$ \\\\ \n", k++, x, f(x));
+    //         }
+    //     }
+    // }
+    // // 弦截法
+    // {
+    //     cout << "弦截法" << endl;
+    //     vector<pair<double, double>> InitialValues = {{0.0, 0.5}, {0.1, 1.5}}; // 初始值 (x0, x1)
+    //     for (pair<double, double> x_ : InitialValues)
+    //     {
+    //         vector<double> Recurrence = SecantMethod(f, f_Derivative, x_.first, x_.second, epsilon);
+    //         int k = 0;
+    //         for (double x : Recurrence)
+    //         {
+    //             printf("\\hline $k = %d$ & $%.10E$ & $%.10E$ \\\\ \n", k++, x, f(x));
+    //         }
+    //     }
+    // }
 }
