@@ -3,3 +3,5 @@
 *.synctex.gz
 *.exe
 *.out
+*.bbl
+*.blg
