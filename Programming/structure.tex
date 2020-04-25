@@ -128,15 +128,15 @@
 
 \titleformat
 {\subsection} % Section type being modified
-[block] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
-{\itshape} % Format of the whole section
-{(\arabic{subsection})} % Format of the section label
+[hang] % Shape type, can be: hang, block, display, runin, leftmargin, rightmargin, drop, wrap, frame
+{\large\bfseries} % Format of the whole section
+{\arabic{section}.\arabic{subsection}} % Format of the section label
 {4pt} % Space between the title and label
 {} % Code before the label
 
 \titlespacing{\subsection}{0pt}{0.5\baselineskip}{0.5\baselineskip} % Spacing around section titles, the order is: left, before and after
 
-\renewcommand\thesubsection{(\arabic{subsection})}
+\renewcommand\thesubsection{\arabic{section}.\arabic{subsection}}
 
 %----------------------------------------------------------------------------------------
 %	CUSTOM QUESTION COMMANDS/ENVIRONMENTS
