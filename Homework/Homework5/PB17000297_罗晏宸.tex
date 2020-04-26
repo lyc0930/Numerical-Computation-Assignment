@@ -54,21 +54,29 @@
 
     \answer
     {
-        迭代公式如下
-        \begin{align*}
-            x_n & = \varphi(x_{n - 1})                                                                            \\
-                & = x_{n - 1} - \frac{x_{n - 1}^3 - 4x_{n - 1}^2 + 5x_{n - 1} - 2}{3x_{n - 1}^2 - 8x_{n - 1} + 5}
-        \end{align*}
-        对$\varphi(x)$求导得到
-        \begin{align*}
-            \varphi'(x) & = \frac{(x^3 - 4x^2 + 5x - 2)(6x - 8)}{(3x^2 - 8x + 5)^2} \\
-                        & = \frac{6x^2 - 20x + 16}{9x^2 - 30x + 25}
-        \end{align*}
-        代入初始值有
-        \begin{equation*}
-            \left|\varphi'(x_0)\right| = \frac{16}{25} < 1
-        \end{equation*}
-        因此迭代是收敛的，极限$\displaystyle \lim_{n \rightarrow \infty}{x_n}$存在。
+    迭代公式如下
+    \begin{align*}
+        x_n & = \varphi(x_{n - 1})                                                                            \\
+            & = x_{n - 1} - \frac{x_{n - 1}^3 - 4x_{n - 1}^2 + 5x_{n - 1} - 2}{3x_{n - 1}^2 - 8x_{n - 1} + 5}
+    \end{align*}
+    由代数方法得到方程$f(x) = 0$有2重根$x = 1$和单根$x = 2$，$f(x) < 0$ 在$x \in [0, 1)$上恒成立。并且 $$f'(x) = 3 x^2 - 8 x + 5  = (x-1) (3 x-5) > 0$$ 在$x \in [0, 1)$上恒成立。同时在$x \in [0, 1]$上对$\varphi(x)$求导得到
+    \begin{align*}
+        \varphi'(x) & = \frac{(x^3 - 4x^2 + 5x - 2)(6x - 8)}{(3x^2 - 8x + 5)^2}         \\
+                    & = \frac{6 x^4-32 x^3+62 x^2-52 x+16}{9 x^4-48 x^3+94 x^2-80 x+25}
+    \end{align*}
+    记$P(x) = 6 x^4-32 x^3+62 x^2-52 x+16$，$Q(x) = 9 x^4-48 x^3+94 x^2-80 x+25$，易知$P(x) \geqslant 0$恒成立。并令
+    \begin{equation*}
+        g(x) = Q(x) - P(x) = 3 x^4-16 x^3+32 x^2-28 x+9
+    \end{equation*}
+    由$g''(x) = (6x - 8)^2 \geqslant 0$可知，$g’(x)$在$x \in [0, 1]$上单调递增，当$x \in [0, 1]$时$g'(x) \leqslant g'(1) = 0$，因此$g(x)$在$x \in [0, 1]$上单调递减，当$x \in [0, 1]$时$g(x) \geqslant g'(1) = 0$，即有
+    \begin{equation*}
+        Q(x) \geqslant P(x) \geqslant 0
+    \end{equation*}
+    因此$\left|\varphi'(x)\right| = \dfrac{P(x)}{Q(x)} < 1$在$x \in [0, 1)$上恒成立。代入初始值有
+    \begin{equation*}
+        \left|\varphi'(x_0)\right| = \frac{16}{25} < 1
+    \end{equation*}
+    因此迭代是收敛的，极限$\displaystyle \lim_{n \rightarrow \infty}{x_n}$存在且为 1。
     }
 
 \end{question}
