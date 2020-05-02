@@ -1,0 +1,365 @@
+\documentclass[11pt]{article}
+\usepackage[UTF8]{ctex}
+
+\input{../structure.tex}
+
+\newcommand{\assignmentQuestionName}{Question}
+\newcommand{\assignmentClass}{计算方法B}
+\newcommand{\assignmentTitle}{Homework\ \#6}
+\newcommand{\assignmentDate}{2020.5.1}
+\newcommand{\assignmentNo}{PB17000297}
+\newcommand{\assignmentAuthorName}{罗晏宸}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\begin{question}
+
+    \questiontext
+    {
+        分别计算下列矩阵的$\Arrowvert \bullet \Arrowvert_1$，$\Arrowvert \bullet \Arrowvert_\infty$范数：
+    }
+    \begin{subquestion}{}
+        \questiontext
+        {
+            \begin{equation*}
+                A = \begin{pmatrix}
+                    \phantom{-}5 & -2           & \phantom{-}1 \\
+                    -1           & \phantom{-}3 & -1           \\
+                    -1           & \phantom{-}2 & -6
+                \end{pmatrix}
+            \end{equation*}
+        }
+        \answer
+        {
+            \begin{align*}
+                \Arrowvert A \Arrowvert_1      & = \max_{1 \leqslant j \leqslant 3}{\left\{\sum_{i = 1}^{3}{\arrowvert a_{ij} \arrowvert}\right\}} \\
+                                               & = \max{\{7,\, 7,\, 8\}}                                                                           \\
+                                               & = 8                                                                                               \\
+                \Arrowvert A \Arrowvert_\infty & = \max_{1 \leqslant i \leqslant 3}{\left\{\sum_{j = 1}^{3}{\arrowvert a_{ij} \arrowvert}\right\}} \\
+                                               & = \max{\{8,\, 5,\, 9\}}                                                                           \\
+                                               & = 9
+            \end{align*}
+        }
+    \end{subquestion}
+    \begin{subquestion}{}
+        \questiontext
+        {
+            \begin{equation*}
+                A = \begin{pmatrix}
+                    \phantom{-}4 & -1           & \phantom{-}1 \\
+                    -2           & \phantom{-}3 & \phantom{-}1 \\
+                    -1           & \phantom{-}1 & \phantom{-}6
+                \end{pmatrix}
+            \end{equation*}
+        }
+        \answer
+        {
+            \begin{align*}
+                \Arrowvert A \Arrowvert_1      & = \max_{1 \leqslant j \leqslant 3}{\left\{\sum_{i = 1}^{3}{\arrowvert a_{ij} \arrowvert}\right\}} \\
+                                               & = \max{\{7,\, 5,\, 8\}}                                                                           \\
+                                               & = 8                                                                                               \\
+                \Arrowvert A \Arrowvert_\infty & = \max_{1 \leqslant i \leqslant 3}{\left\{\sum_{j = 1}^{3}{\arrowvert a_{ij} \arrowvert}\right\}} \\
+                                               & = \max{\{6,\, 6,\, 8\}}                                                                           \\
+                                               & = 8
+            \end{align*}
+        }
+    \end{subquestion}
+
+\end{question}
+
+\begin{question}
+
+    \questiontext
+    {
+        分别计算矩阵$A =
+            \begin{pmatrix}
+                \phantom{-}4 & -2           \\
+                -1           & \phantom{-}1 \\
+            \end{pmatrix}$
+        的谱半径及其$\Arrowvert \bullet \Arrowvert_2$范数。
+    }
+
+    \answer
+    {
+        设$\lambda$为 $A$ 的特征值，则有
+        \begin{align*}
+                        &  & \det{(A - \lambda \mathbf{I})}                & = 0 &  &  & \\
+            \Rightarrow &  & \begin{vmatrix}
+                4 - \lambda & -2          \\
+                -1          & 1 - \lambda \\
+            \end{vmatrix}                     & = 0 &  &  & \\
+            \Rightarrow &  & (4 - \lambda)(1 - \lambda) - (-1) \times (-2) & = 0 &  &  & \\
+            \Rightarrow &  & \lambda^2 - 5 \lambda + 2                     & = 0 &  &  &
+        \end{align*}
+        解得
+        \begin{equation*}
+            \lambda_1 = \frac{5-\sqrt{17}}{2},\ \lambda_2 = \frac{5+\sqrt{17}}{2}
+        \end{equation*}
+        进而有$A$的谱半径
+        \begin{align*}
+            \rho(A) & = \max_i{|\lambda_i|}                                  \\
+                    & = \max{\frac{5-\sqrt{17}}{2},\, \frac{5+\sqrt{17}}{2}} \\
+                    & = \frac{5+\sqrt{17}}{2}
+        \end{align*}
+        设$\mu$是矩阵$A^{\mathbf{T}}\!A$的特征值，则有
+        \begin{align*}
+                        &  & \det(A^{\mathbf{T}}\!A - \mu\mathbf{I})                                                             & = 0 &  &  & \\
+            \Rightarrow &  & \det{\left(\begin{pmatrix}
+                    \phantom{-}4 & -1           \\
+                    -2           & \phantom{-}1 \\
+                \end{pmatrix}\begin{pmatrix}
+                    \phantom{-}4 & -2           \\
+                    -1           & \phantom{-}1 \\
+                \end{pmatrix} - \begin{pmatrix}
+                    \mu & 0   \\
+                    0   & \mu \\
+                \end{pmatrix}\right)} & = 0 &  &  & \\
+            \Rightarrow &  & \begin{vmatrix}
+                17 - \mu & -9     \\
+                -9       & 5 -\mu \\
+            \end{vmatrix}                                                                          & = 0 &  &  & \\
+            \Rightarrow &  & (5 -\mu)(17 -\mu) - (-9) \times (-9)                                                                & = 0 &  &  & \\
+            \Rightarrow &  & \mu^2 - 22\mu + 24                                                                                  & = 0 &  &  & \\
+        \end{align*}
+        解得
+        \begin{equation*}
+            \mu_1 = 11-3 \sqrt{13},\ \mu_2 = 11+3 \sqrt{13}
+        \end{equation*}
+        由此矩阵$A$的$\Arrowvert \bullet \Arrowvert_2$范数计算如下
+        \begin{align*}
+            \Arrowvert A \Arrowvert_2 & = \sqrt{\max_{1 \leqslant i \leqslant n}{\{\left|\mu_i\right|}\}} \\
+                                      & = \sqrt{\max{\{11-3 \sqrt{13},\, 11+3 \sqrt{13}\}}}               \\
+                                      & = \sqrt{11+3 \sqrt{13}}
+        \end{align*}
+    }
+
+\end{question}
+
+\begin{question}
+
+    \questiontext
+    {
+        用 Doolittle 分解法解下列线性方程组（请给出详细的解题过程，包括矩阵分解）
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                 & 5x_1 + \phantom{1}x_2 + 2x_3           &  & = 10 & \\
+                 & \phantom{1}x_1 + 3x_2 - \phantom{1}x_3 &  & = 5  & \\
+                 & 2x_1 + \phantom{1}x_2 + 5x_3           &  & = 20 & \\
+            \end{aligned}
+            \right.
+        \end{equation*}
+    }
+
+    \answer
+    {
+        以矩阵形式表示题设线性方程组为$Ax = b$，其中
+        \begin{equation*}
+            A = \begin{pmatrix}
+                5 & 1 & \phantom{-}2 \\
+                1 & 3 & -1           \\
+                2 & 1 & \phantom{-}5
+            \end{pmatrix}
+            , b = \begin{pmatrix}
+                10 \\
+                5  \\
+                20
+            \end{pmatrix}
+        \end{equation*}
+        设
+        \begin{equation*}
+            A = LU = \begin{pmatrix}
+                1      & 0      & 0 \\
+                l_{21} & 1      & 0 \\
+                l_{31} & l_{32} & 1
+            \end{pmatrix} \begin{pmatrix}
+                u_{11} & u_{12} & u_{13} \\
+                0      & u_{22} & u_{23} \\
+                0      & 0      & u_{33}
+            \end{pmatrix}
+        \end{equation*}
+
+        首先计算$U$的第一行元素有
+        \begin{equation*}
+            a_{1j} = \sum_{r = 1}^3{l_{1r}u_{rj}} =
+            \begin{pmatrix}
+                1 & 0 & 0
+            \end{pmatrix}
+            \begin{pmatrix}
+                u_{13} \\
+                u_{23} \\
+                u_{33}
+            \end{pmatrix}
+            = u_{1j},\quad j = 1, 2, 3
+        \end{equation*}
+        得到
+        \begin{equation*}
+            u_{11} = a_{11} = 5,\
+            u_{12} = a_{12} = 1,\
+            u_{13} = a_{13} = 2,\
+        \end{equation*}
+
+        其次计算$L$的第一列元素有
+        \begin{equation*}
+            a_{i1} = \sum_{r = 1}^3{l_{ir}u_{r1}} =
+            \begin{pmatrix}
+                l_{i1} & \cdots & l_{i,i-1} & 1 & 0 & \cdots & 0
+            \end{pmatrix}
+            \begin{pmatrix}
+                u_{11} \\
+                0      \\
+                \vdots \\
+                0
+            \end{pmatrix}
+            = l_{i1}u_{11},\quad i = 2, 3
+        \end{equation*}
+        得到
+        \begin{equation*}
+            l_{21} = \frac{a_{21}}{u_{11}} = \frac{1}{5},\
+            l_{31} = \frac{a_{31}}{u_{11}} = \frac{2}{5}
+        \end{equation*}
+
+        然后由
+        \begin{equation*}
+            a_{2i} =
+            \begin{pmatrix}
+                l_{21} & 1 & 0
+            \end{pmatrix}
+            \begin{pmatrix}
+                u_{1i} \\
+                u_{2i} \\
+                u_{3i}
+            \end{pmatrix}
+            = l_{21}u_{1i} + u_{2i},\quad i = 2,3
+        \end{equation*}
+        得到
+        \begin{equation*}
+            u_{22} = a_{22} - l_{21}u_{12} = 3 - \frac{1}{5} \times 1 = \frac{14}{5},\ u_{23} = a_{23} - l_{21}u_{13} = -1 - \frac{1}{5} \times 2 = -\frac{7}{5}
+        \end{equation*}
+
+        再由
+        \begin{equation*}
+            a_{32} =
+            \begin{pmatrix}
+                l_{31} & l_{32} & 1
+            \end{pmatrix}
+            \begin{pmatrix}
+                u_{12} \\
+                u_{22} \\
+                0
+            \end{pmatrix}
+            = l_{31}u_{12} + l_{32}u_{22}
+        \end{equation*}
+        得到
+        \begin{equation*}
+            l_{32} = \frac{a_{32} - l_{31}u_{12}}{u_{22}} = \frac{1 - \dfrac{2}{5} \times 1}{\dfrac{14}{5}} = \frac{3}{14}
+        \end{equation*}
+
+        最后由
+        \begin{equation*}
+            a_{33} =
+            \begin{pmatrix}
+                l_{31} & l_{32} & 1
+            \end{pmatrix}
+            \begin{pmatrix}
+                u_{13} \\
+                u_{23} \\
+                u_{33}
+            \end{pmatrix}
+            = l_{31}u_{13} + l_{32}u_{23} + u_{33}
+        \end{equation*}
+        得到
+        \begin{equation*}
+            u_{33} = a_{33} - l_{31}u_{13} - l_{32}u_{23} = 5 - \frac{2}{5} \times 2 - \frac{3}{14} \times (-\frac{7}{5}) = \frac{9}{2}
+        \end{equation*}
+
+        综上得到
+        \begin{equation*}
+            A = LU = \begin{pmatrix}[1.7]
+                1            & 0             & 0 \\
+                \dfrac{1}{5} & 1             & 0 \\
+                \dfrac{2}{5} & \dfrac{3}{14} & 1
+            \end{pmatrix} \begin{pmatrix}[1.7]
+                5 & 1             & \phantom{-}2            \\
+                0 & \dfrac{14}{5} & -\dfrac{7}{5}           \\
+                0 & 0             & \phantom{-}\dfrac{9}{2}
+            \end{pmatrix}
+        \end{equation*}
+
+        解方程$Ly = b$
+        \begin{align*}
+            \begin{pmatrix}[1.7]
+                1            & 0             & 0 \\
+                \dfrac{1}{5} & 1             & 0 \\
+                \dfrac{2}{5} & \dfrac{3}{14} & 1
+            \end{pmatrix}
+            \begin{pmatrix}[1.7]
+                y_1 \\
+                y_2 \\
+                y_3
+            \end{pmatrix}
+             & =
+            \begin{pmatrix}[1.7]
+                10 \\
+                5  \\
+                20
+            \end{pmatrix} \\
+            \begin{pmatrix}[1.7]
+                y_1 \\
+                y_2 \\
+                y_3
+            \end{pmatrix}
+             & =
+            \begin{pmatrix}[1.7]
+                10 \\
+                3  \\
+                \dfrac{215}{14}
+            \end{pmatrix}
+        \end{align*}
+
+        解方程$Ux = y$
+        \begin{align*}
+            \begin{pmatrix}[1.7]
+                5 & 1             & \phantom{-}2            \\
+                0 & \dfrac{14}{5} & -\dfrac{7}{5}           \\
+                0 & 0             & \phantom{-}\dfrac{9}{2}
+            \end{pmatrix}
+            \begin{pmatrix}[1.7]
+                x_1 \\
+                x_2 \\
+                x_3
+            \end{pmatrix}
+             & =
+            \begin{pmatrix}[1.7]
+                10 \\
+                3  \\
+                \dfrac{215}{14}
+            \end{pmatrix} \\
+            \begin{pmatrix}[1.7]
+                x_1 \\
+                x_2 \\
+                x_3
+            \end{pmatrix}
+             & =
+            \begin{pmatrix}[1.7]
+                \dfrac{5}{63} \\
+                \dfrac{25}{9} \\
+                \dfrac{215}{63}
+            \end{pmatrix}
+            \approx
+            \begin{pmatrix}[1.7]
+                0.0794 \\
+                2.7778 \\
+                3.4127
+            \end{pmatrix}
+        \end{align*}
+    }
+
+\end{question}
+\end{document}
