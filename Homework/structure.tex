@@ -33,12 +33,17 @@
 \usepackage{etoolbox} % Required for if statements
 
 \usepackage{amsmath}
+\allowdisplaybreaks[4]
+
 
 % 增加矩阵两侧括号内侧的空白，新建附参数arraystretch的matrix命令族
 \makeatletter
 \renewenvironment{pmatrix}
 {\left(\mkern10.0mu\env@matrix}
 {\endmatrix\mkern10.0mu\right)}
+\renewenvironment{vmatrix}
+{\left|\mkern10.0mu\env@matrix}
+{\endmatrix\mkern10.0mu\right|}
 \renewcommand*\env@matrix[1][\arraystretch]{%
 	\edef\arraystretch{#1}%
 	\hskip -\arraycolsep

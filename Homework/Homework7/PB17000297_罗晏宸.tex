@@ -1,0 +1,289 @@
+\documentclass[11pt]{article}
+\usepackage[UTF8]{ctex}
+
+\input{../structure.tex}
+
+\newcommand{\assignmentQuestionName}{Question}
+\newcommand{\assignmentClass}{计算方法B}
+\newcommand{\assignmentTitle}{Homework\ \#7}
+\newcommand{\assignmentDate}{2020.5.6}
+\newcommand{\assignmentNo}{PB17000297}
+\newcommand{\assignmentAuthorName}{罗晏宸}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\begin{question}
+
+    \questiontext
+    {
+        设有线性代数方程组 $Ax = b$，其中，
+        \begin{equation*}
+            A =
+            \begin{pmatrix}
+                \phantom{-}2 & -1           & \phantom{-}0 & \phantom{-}0 \\
+                -1           & \phantom{-}2 & -1           & \phantom{-}0 \\
+                \phantom{-}0 & -1           & \phantom{-}2 & -1           \\
+                \phantom{-}0 & \phantom{-}0 & -1           & \phantom{-}2
+            \end{pmatrix}
+            ,\quad
+            b =
+            \begin{pmatrix}
+                2 \\
+                2 \\
+                2 \\
+                2
+            \end{pmatrix}
+        \end{equation*}
+    }
+    \begin{subquestion}{求 Jacobi 迭代的迭代矩阵及相应的迭代格式；}
+        \answer
+        {
+            令
+            \begin{equation*}
+                D = \operatorname{diag}{\left\{a_{11}, a_{22}, a_{33}, a_{44}\right\}} =\operatorname{diag}{\left\{2, 2, 2, 2\right\}}
+            \end{equation*}
+            $D$可逆，由$Ax = (D + A - D)x = b$得到等价方程组$Dx = (D - A)x + b$，迭代格式的矩阵形式为
+            \begin{equation*}
+                x^{(k + 1)} = Rx^{(k)} + g
+            \end{equation*}
+            其中$R$是迭代矩阵
+            \begin{equation*}
+                R = \mathbf{I} - D^{-1}A =
+                \begin{pmatrix}[1.7]
+                    0            & \dfrac{1}{2} & 0            & 0            \\
+                    \dfrac{1}{2} & 0            & \dfrac{1}{2} & 0            \\
+                    0            & \dfrac{1}{2} & 0            & \dfrac{1}{2} \\
+                    0            & 0            & \dfrac{1}{2} & 0
+                \end{pmatrix}
+                ,\quad
+                g = D^{-1}b =
+                \begin{pmatrix}[1.7]
+                    1 \\
+                    1 \\
+                    1 \\
+                    1
+                \end{pmatrix}
+            \end{equation*}
+            相应的迭代格式为
+            \begin{equation*}
+                \left\{
+                \begin{aligned}
+                    x_1^{(k + 1)} & = 0.5x_2^{(k)} + 1                \\
+                    x_2^{(k + 1)} & = 0.5x_1^{(k)} + 0.5x_3^{(k)} + 1 \\
+                    x_3^{(k + 1)} & = 0.5x_2^{(k)} + 0.5x_4^{(k)} + 1 \\
+                    x_4^{(k + 1)} & = 0.5x_3^{(k)} + 1
+                \end{aligned}
+                \right.
+            \end{equation*}
+        }
+    \end{subquestion}
+
+    \begin{subquestion}{讨论此时 Jacobi 迭代（方法）的收敛性。}
+        \answer
+        {
+            题设系数矩阵$A$满足
+            \begin{align*}
+                \left|a_{11}\right| = 2 > \sum_{j \neq 1}{\left|a_{1j}\right|} = 1 \\
+                \left|a_{22}\right| = 2 = \sum_{j \neq 2}{\left|a_{2j}\right|} = 2 \\
+                \left|a_{33}\right| = 2 = \sum_{j \neq 3}{\left|a_{3j}\right|} = 2 \\
+                \left|a_{44}\right| = 2 > \sum_{j \neq 4}{\left|a_{4j}\right|} = 1
+            \end{align*}
+            可知$A$是行对角优但不是严格行对角优的。同时注意到$A^\mathbf{T} = A$，即$A$是对称矩阵，可知$A$是列对角优但不是严格列对角优的，因此$A$不是严格对角优的，无法直接判断 Jacobi 迭代的收敛性。
+
+            下面计算迭代矩阵$R$的谱半径$\rho(R)$，设$\lambda$为$R$的特征值，则有
+            \begin{align*}
+                            &  & \det{(R - \lambda \mathbf{I})}               & = 0 &  &  & \\
+                \Rightarrow &  & \begin{vmatrix}[1.7]
+                    -\lambda     & \dfrac{1}{2} & 0            & 0            \\
+                    \dfrac{1}{2} & -\lambda     & \dfrac{1}{2} & 0            \\
+                    0            & \dfrac{1}{2} & -\lambda     & \dfrac{1}{2} \\
+                    0            & 0            & \dfrac{1}{2} & -\lambda
+                \end{vmatrix}                    & = 0 &  &  & \\
+                \Rightarrow &  & \lambda ^4-\frac{3}{4}\lambda^2+\frac{1}{16} & = 0 &  &  &
+            \end{align*}
+            解得
+            \begin{equation*}
+                \lambda_1 = - \frac{1 + \sqrt{5}}{4},\, \lambda_2 = \frac{1 - \sqrt{5}}{4},\, \lambda_3 = - \frac{1 - \sqrt{5}}{4},\, \lambda_4 = \frac{1 + \sqrt{5}}{4}
+            \end{equation*}
+            进而有$R$的谱半径
+            \begin{align*}
+                \rho(R) & = \max_i{\left|\lambda_i\right|}                                                                                           \\
+                        & = \max{\left\{\frac{1 + \sqrt{5}}{4},\, \frac{\sqrt{5} - 1}{4},\, \frac{\sqrt{5} - 1}{4},\,\frac{1 + \sqrt{5}}{4}\right\}} \\
+                        & = \frac{1 + \sqrt{5}}{4} < 1
+            \end{align*}
+            因此迭代是收敛的。
+        }
+    \end{subquestion}
+
+\end{question}
+
+\begin{question}
+    \questiontext
+    {
+        设有线性代数方程组
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                \phantom{-}5x_1 - 3x_2 + 2x_3 & = 5 \\
+                -3x_1 + 5x_2 + 2x_3           & = 5 \\
+                \phantom{-}2x_1 + 2x_2 + 7x_3 & = 7
+            \end{aligned}
+            \right.
+        \end{equation*}
+    }
+    \begin{subquestion}{写出 Gauss-Seidel 迭代的分量形式；}
+        \answer
+        {
+            将第$i$行的变量$x_i$留在方程左边，并除以系数$a_{ii}$，系数矩阵的下三角元素冠以$k+1$得到迭代格式的分量形式为
+            \begin{equation*}
+                \left\{
+                \begin{aligned}
+                    x_1^{(k + 1)} & = \phantom{-}\dfrac{3}{5}x_2^{(k)\phantom{+1}} - \dfrac{2}{5}x_3^{(k)\phantom{+1}} + 1 \\
+                    x_2^{(k + 1)} & = \phantom{-}\dfrac{3}{5}x_1^{(k + 1)} - \dfrac{2}{5}x_2^{(k)\phantom{+1}} + 1         \\
+                    x_3^{(k + 1)} & = -\dfrac{2}{7}x_1^{(k + 1)} - \dfrac{2}{7}x_2^{(k + 1)} + 1
+                \end{aligned}
+                \right.
+            \end{equation*}
+        }
+    \end{subquestion}
+    \begin{subquestion}{求 Gauss-Seidel 迭代的分裂矩阵(splitting matrix)及迭代矩阵(iteration matrix)；}
+        \answer
+        {
+            设原方程组的矩阵形式$Ax = b$，其中
+            \begin{equation*}
+                A =
+                \begin{pmatrix}
+                    \phantom{-}5 & -3           & \phantom{-}2 \\
+                    -3           & \phantom{-}5 & \phantom{-}2 \\
+                    \phantom{-}2 & \phantom{-}2 & \phantom{-}7
+                \end{pmatrix}
+                ,\quad
+                b =
+                \begin{pmatrix}
+                    5 \\
+                    5 \\
+                    7
+                \end{pmatrix}
+            \end{equation*}
+            分解系数矩阵
+            \begin{align*}
+                A & = D + L + U \\
+                  & =
+                \begin{pmatrix}
+                    5 & 0 & 0 \\
+                    0 & 5 & 0 \\
+                    0 & 0 & 7
+                \end{pmatrix}
+                +
+                \begin{pmatrix}
+                    \phantom{-}0 & \phantom{-}0 & \phantom{-}0 \\
+                    -3           & \phantom{-}0 & \phantom{-}0 \\
+                    \phantom{-}2 & \phantom{-}2 & \phantom{-}0
+                \end{pmatrix}
+                +
+                \begin{pmatrix}
+                    \phantom{-}0 & -3           & \phantom{-}2 \\
+                    \phantom{-}0 & \phantom{-}0 & \phantom{-}2 \\
+                    \phantom{-}0 & \phantom{-}0 & \phantom{-}0
+                \end{pmatrix}
+            \end{align*}
+            写成等价矩阵表达式
+            \begin{equation*}
+                (D + L)x = -Ux + b
+            \end{equation*}
+            记$Q = U + L$，构造迭代形式
+            \begin{equation*}
+                Qx^{(k + 1)} = -Ux^{(k)} + b
+            \end{equation*}
+            记 Gauss-Seidel 迭代的矩阵形式为
+
+            \begin{equation*}
+                x^{(k + 1)} = Sx^{(k)} + f
+            \end{equation*}
+            其中$S$是迭代矩阵
+            \begin{equation*}
+                S = -(D + L)^{-1}U = \mathbf{I} - Q^{-1}A =
+                \begin{pmatrix}[1.7]
+                    0 & \phantom{-}\dfrac{3}{5}  & -\dfrac{2}{5}              \\
+                    0 & \phantom{-}\dfrac{9}{25} & -\dfrac{16}{25}            \\
+                    0 & -\dfrac{48}{175}         & \phantom{-}\dfrac{52}{175}
+                \end{pmatrix}
+                ,\quad f = Q^{-1}b =
+                \begin{pmatrix}[1.7]
+                    1            \\
+                    \dfrac{8}{5} \\
+                    \dfrac{9}{35}
+                \end{pmatrix}
+            \end{equation*}
+        }
+    \end{subquestion}
+    \begin{subquestion}{讨论 Gauss-Seidel 迭代的收敛性（请给出理由或证明）。}
+        \answer
+        {
+            观察原方程的系数矩阵
+            \begin{equation*}
+                A =
+                \begin{pmatrix}
+                    \phantom{-}5 & -3           & \phantom{-}2 \\
+                    -3           & \phantom{-}5 & \phantom{-}2 \\
+                    \phantom{-}2 & \phantom{-}2 & \phantom{-}7
+                \end{pmatrix}
+            \end{equation*}
+            其满足
+            \begin{align*}
+                \left|a_{11}\right| = 5 = \sum_{j \neq 1}{\left|a_{1j}\right|} = 5 \\
+                \left|a_{22}\right| = 5 = \sum_{j \neq 2}{\left|a_{2j}\right|} = 5 \\
+                \left|a_{33}\right| = 7 > \sum_{j \neq 3}{\left|a_{3j}\right|} = 4
+            \end{align*}
+            可知$A$是行对角优但不是严格行对角优的。同时注意到$A^\mathbf{T} = A$，即$A$是对称矩阵，可知$A$是列对角优但不是严格列对角优的，因此$A$不是严格对角优的，无法说明迭代的收敛性。
+
+            下面证明$A$是正定的，$A$的各阶顺序主子式为
+            \begin{align*}
+                [A]_{\{1\},\{1\}}         & =
+                \begin{vmatrix}
+                    5
+                \end{vmatrix}
+                = 5                                                                            \\
+                [A]_{\{1,2\},\{1,2\}}     & =
+                \begin{vmatrix}
+                    \phantom{-}5 & -3           \\
+                    -3           & \phantom{-}5
+                \end{vmatrix}
+                = 5 \times 5 - (-3) \times (-3)  = 16                                          \\
+                [A]_{\{1,2,3\},\{1,2,3\}} & =
+                \begin{vmatrix}
+                    \phantom{-}5 & -3           & \phantom{-}2 \\
+                    -3           & \phantom{-}5 & \phantom{-}2 \\
+                    \phantom{-}2 & \phantom{-}2 & \phantom{-}7
+                \end{vmatrix}                                                     \\
+                                          & = 5 \times
+                \begin{vmatrix}
+                    \phantom{-}5 & \phantom{-}2 \\
+                    \phantom{-}2 & \phantom{-}7
+                \end{vmatrix}
+                - (-3) \times
+                \begin{vmatrix}
+                    -3           & \phantom{-}2 \\
+                    \phantom{-}2 & \phantom{-}7
+                \end{vmatrix}
+                + 2 \times
+                \begin{vmatrix}
+                    -3           & \phantom{-}5 \\
+                    \phantom{-}2 & \phantom{-}2
+                \end{vmatrix}                                                     \\
+                                          & = 5 \times 31 - (-3) \times (-25) + 2 \times (-16) \\
+                                          & = 48
+            \end{align*}
+            $A$的各阶顺序主子式均为正，因此$A$是正定的，所以 Gauss-Seidel 迭代收敛。
+        }
+    \end{subquestion}
+
+\end{question}
+
+\end{document}
