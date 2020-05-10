@@ -1,0 +1,61 @@
+\documentclass[11pt]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{subcaption}
+\input{../structure.tex}
+
+\sisetup
+{
+    table-format = +1.12e+003,
+}
+
+\newcommand{\assignmentQuestionName}{Question} % The word to be used as a prefix to question numbers; example alternatives: Problem, Exercise
+\newcommand{\assignmentClass}{计算方法B} % Course/class
+\newcommand{\assignmentTitle}{Programming Assignment\ \#4}
+\newcommand{\assignmentDate}{2020.5.10} % date
+\newcommand{\assignmentNo}{PB17000297}
+\newcommand{\assignmentAuthorName}{罗晏宸} % Student name
+
+\begin{document}
+
+\maketitle % Print the title page
+
+\thispagestyle{empty} % Suppress headers and footers on the title page
+
+\newpage
+
+\assignmentSection{迭代法解线性代数方程组}
+\section{问题描述}
+分别编写Jacobi迭代及Gauss-Seidel迭代的通用程序；注意，不容许对矩阵作求逆运算。分别用如上程序求下述方程组的解，请输出各自的迭代步数以及数值解。
+
+考虑线性代数方程组 $Ax = b$，其中
+\begin{align*}
+    A & =
+    \begin{pmatrix}
+        \phantom{-}2 & -1           &        &              &              \\
+        -1           & \phantom{-}2 & -1     &              &              \\
+                     & \ddots       & \ddots & \ddots       &              \\
+                     &              & -1     & \phantom{-}2 & -1           \\
+                     &              &        & -1           & \phantom{-}2
+    \end{pmatrix}_{10 \times 10}
+    \text{为三角矩阵}                                       \\
+    b & = (2,\, \cdots,\, 2)^\mathbf{T} \in \mathbb{R}^{10}
+\end{align*}
+
+取初始迭代 $x^{(0)} = (0, 0, \cdots, 0)^\mathbf{T}$；停止条件 $\left\Arrowvert x^{(k + 1)} - x^{(k)} \right\Arrowvert_{\infty} \leqslant 10^{-5}$。请输出各自的迭代次数以及最终的数值解；通过本次实验，讨论并比较两种迭代方法的优缺点（比如收敛速度等等）；给出实验小结。
+
+
+\section{计算结果}
+
+\section{结果分析}
+
+\section{算法分析}
+
+\section{实验结论}
+
+\end{document}
+
+
+
+
+
+
