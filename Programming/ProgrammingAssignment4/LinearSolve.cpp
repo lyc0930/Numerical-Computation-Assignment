@@ -45,6 +45,13 @@ public:
         }
     }
 
+    // 根据valarray表示的 A 构造方阵
+    Matrix(valarray<T> A) : data(A), row(sqrt(A.size())), column(sqrt(A.size()))
+    {
+        if (pow(sqrt(A.size()), 2) != A.size()) // 大小为平方数
+            throw "Unprocessable Matrix";
+    }
+
     // 返回矩阵的宽
     int width() { return column; }
 
@@ -100,7 +107,7 @@ public:
     Coefficient_Matrix(vector<valarray<T>> A) : Matrix<T>(A), _isAugmented(false) {}
 
     // 构造以 A 为系数矩阵且以 b 为常数矩阵的増广矩阵
-    Coefficient_Matrix(vector<valarray<T>> A, valarray<T> b) : Matrix<T>(A)
+    Coefficient_Matrix(vector<valarray<T>> A, valarray<T> b) : Matrix<T>(A), _isAugmented(true)
     {
         Matrix<T>::row = A.size(); // 行数
         Matrix<T>::column = 0;     // 获得列数
@@ -121,7 +128,27 @@ public:
             i++;
         }
         Matrix<T>::data[slice(Matrix<T>::column - 1, Matrix<T>::row, Matrix<T>::column)] = b;
-        _isAugmented = true;
+    }
+
+    // 根据valarray表示的 A 构造方阵
+    Coefficient_Matrix(valarray<T> A) : Matrix<T>(A), _isAugmented(false) {}
+
+    // 根据valarray表示的 A 和常数矩阵 b 构造増广矩阵
+    Coefficient_Matrix(valarray<T> A, valarray<T> b) : Matrix<T>(A), _isAugmented(true)
+    {
+        if (pow(sqrt(A.size()), 2) != A.size()) // 大小为平方数
+            throw "Unprocessable Matrix";
+        else
+        {
+            Matrix<T>::row = sqrt(A.size()); // 行数与列数
+            Matrix<T>::column = Matrix<T>::row + 1;
+            Matrix<T>::data = valarray<T>(Matrix<T>::row * Matrix<T>::column);
+            for (int i = 0; i < Matrix<T>::row; i++)
+            {
+                Matrix<T>::data[slice(i * Matrix<T>::column, Matrix<T>::column - 1, 1)] = A[slice(i * (Matrix<T>::column - 1), Matrix<T>::column - 1, 1)];
+            }
+            Matrix<T>::data[slice(Matrix<T>::column - 1, Matrix<T>::row, Matrix<T>::column)] = b;
+        }
     }
 
     // 是否是増广矩阵
@@ -191,30 +218,72 @@ public:
     }
 };
 
-valarray<double> JacobiMethod(Coefficient_Matrix<double> M, valarray<double> x_0, double epsilon)
+// 使用 Jacobi 迭代法，解线性方程组 M = (A | b)
+vector<valarray<double>> JacobiMethod(Coefficient_Matrix<double> M, valarray<double> x0, double epsilon)
 {
-    valarray<double> x_1(x_0), x_2(x_0);
+
+    vector<valarray<double>> x = {x0};
+    valarray<double> x2(x0);
     do
     {
-        x_1 = x_2;
         for (int i = 1; i <= M.height(); i++)
         {
             double s = 0;
             for (int j = 1; j <= M.height(); j++)
-                s += M.A(i, j) * x_1[j - 1];
-            x_2[i - 1] = (M.b(i) - s + M.A(i, i) * x_1[i - 1]) / M.A(i, i);
+                s += M.A(i, j) * x.back()[j - 1];
+            x2[i - 1] = (M.b(i) - s + M.A(i, i) * x.back()[i - 1]) / M.A(i, i);
         }
-        for (auto x : x_2)
-            cout << x << ' ';
-        cout << endl;
-    } while (abs(x_1 - x_2).max() > epsilon);
-    return x_2;
+        // for (auto x : x2)
+        //     printf("%.10E ", x);
+        // cout << endl;
+        x.push_back(x2);
+    } while (abs(x.at(x.size() - 2) - x.back()).max() > epsilon);
+    return x;
+}
+
+// 使用 GaussSeidel 迭代法，解线性方程组 M = (A | b)
+vector<valarray<double>> GaussSeidelMethod(Coefficient_Matrix<double> M, valarray<double> x0, double epsilon)
+{
+
+    vector<valarray<double>> x = {x0};
+    valarray<double> x2(x0);
+    do
+    {
+        for (int i = 1; i <= M.height(); i++)
+        {
+            double s = 0;
+            for (int j = 1; j <= M.height(); j++)
+                s += M.A(i, j) * x2[j - 1];
+            x2[i - 1] = (M.b(i) - s + M.A(i, i) * x.back()[i - 1]) / M.A(i, i);
+        }
+        // for (auto x : x2)
+        //     printf("%.10E ", x);
+        // cout << endl;
+        x.push_back(x2);
+    } while (abs(x.at(x.size() - 2) - x.back()).max() > epsilon);
+    return x;
 }
 
 int main()
 {
-    Coefficient_Matrix<double> M({{2, -1, -1}, {1, 5, -1}, {1, 1, 10}}, {-5, 8, 11});
-    M.print();
+    valarray<double> A(10 * 10);
+    for (int i = 0; i < 10; i++)
+    {
+        A[i * 10 + i - 1] = -1;
+        A[i * 10 + i] = 2;
+        A[i * 10 + i + 1] = -1;
+    }
+    valarray<double> b(2, 10);
+    valarray<double> x0(10);
+    Coefficient_Matrix<double> M(A, b);
+    M.print(3);
     cout << endl;
-    JacobiMethod(N, {1, 1, 1}, 1E-5);
+    vector<valarray<double>> Recurrence_Jacobi = JacobiMethod(M, x0, 1E-5);
+    cout << "k = " << Recurrence_Jacobi.size() << endl;
+    for (auto x : Recurrence_Jacobi.back())
+        printf("%.10E\n", x);
+    vector<valarray<double>> Recurrence_GaussSeidel = GaussSeidelMethod(M, x0, 1E-2);
+    cout << "k = " << Recurrence_GaussSeidel.size() << endl;
+    for (auto x : Recurrence_GaussSeidel.back())
+        printf("%.10E\n", x);
 }
