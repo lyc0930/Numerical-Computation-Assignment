@@ -45,13 +45,19 @@ public:
         }
     }
 
-    // 返回位于(r, c)的元素
+    // 返回矩阵的宽
+    int width() { return column; }
+
+    // 矩阵的高
+    int height() { return row; }
+
+    // 位于(r, c)的元素
     T &operator()(int r, int c)
     {
         return data[(r - 1) * column + (c - 1)];
     }
 
-    // 返回第 i 个元素
+    // 第 i 个元素
     T operator()(int i) { return data[i - 1]; }
 
     // 以切片返回第 r 行作为左值
@@ -147,7 +153,7 @@ public:
         return;
     }
 
-    // 返回系数矩阵元素A_ij
+    // 系数矩阵元素A_ij
     T &A(int i, int j)
     {
         if (i <= 0 || i > Matrix<T>::row || j <= 0 || j > Matrix<T>::column)
@@ -156,7 +162,7 @@ public:
             return Matrix<T>::operator()(i, j);
     }
 
-    // 返回常数矩阵元素b_i
+    // 常数矩阵元素b_i
     T &b(int i)
     {
         if (i <= 0 || i > Matrix<T>::row)
@@ -185,28 +191,30 @@ public:
     }
 };
 
+valarray<double> JacobiMethod(Coefficient_Matrix<double> M, valarray<double> x_0, double epsilon)
+{
+    valarray<double> x_1(x_0), x_2(x_0);
+    do
+    {
+        x_1 = x_2;
+        for (int i = 1; i <= M.height(); i++)
+        {
+            double s = 0;
+            for (int j = 1; j <= M.height(); j++)
+                s += M.A(i, j) * x_1[j - 1];
+            x_2[i - 1] = (M.b(i) - s + M.A(i, i) * x_1[i - 1]) / M.A(i, i);
+        }
+        for (auto x : x_2)
+            cout << x << ' ';
+        cout << endl;
+    } while (abs(x_1 - x_2).max() > epsilon);
+    return x_2;
+}
+
 int main()
 {
-    Coefficient_Matrix<double> M(3);
-    double n = 14.5;
-    for (int i = 1; i <= 3; i++)
-        for (int j = 1; j <= 3; j++)
-            M(i, j) = ++n;
+    Coefficient_Matrix<double> M({{2, -1, -1}, {1, 5, -1}, {1, 1, 10}}, {-5, 8, 11});
     M.print();
     cout << endl;
-
-    // swap column
-    valarray<double> temp = M.Column(1);
-    M.Column(1) = M.Column(3);
-    M.Column(3) = temp;
-    M.print(4);
-    cout << endl;
-
-    M.append({12, 24, 3});
-    M(1, 4) = 0;
-    M.print(3);
-    cout << endl;
-
-    Coefficient_Matrix<double> N({{1, 2}, {2, 4, 5}});
-    N.print(2);
+    JacobiMethod(N, {1, 1, 1}, 1E-5);
 }
