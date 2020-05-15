@@ -83,12 +83,65 @@
         \caption{Gauss-Seidel 迭代数值解}
     \end{subfigure}
 \end{figure}
-其中 Jacobi 迭代次数为 284 次，Gauss-Seidel 迭代次数为 151。
+其中 Jacobi 迭代次数为 284 次，Gauss-Seidel 迭代次数为 151 次。
+
 \section{结果分析}
+使用 Mathematica 计算得到线性方程组的准确解为
+\begin{equation*}
+    x^* =    ( 10, 18, 24, 28, 30, 30, 28, 24, 18, 10 ) ^ \mathbf{T}
+\end{equation*}
+观察得使用迭代算法得到的数值解和准确解在各个分量上的误差均不超过$10^{-4}$，计算可得 Jacob1 迭代所得数值解误差
+\begin{equation*}
+    e_1 = \left\Arrowvert x^{(k)} - x^{*} \right\Arrowvert_{\infty} = \max_{i}{|x^{(k)}_i - x^{*}_i|} = 0.000245381
+\end{equation*}
+Gauss-Seidel 迭代所得数值解误差
+\begin{equation*}
+    e_2 = \left\Arrowvert x^{(k)} - x^{*} \right\Arrowvert_{\infty} = \max_{i}{|x^{(k)}_i - x^{*}_i|} = 0.000122046
+\end{equation*}
+这表明两组计算实际上均向准确值收敛，设置停止条件也有效控制了误差，对比之下，Gauss-Seidel 迭代的误差控制的更好。并且在相同的计算误差停止条件控制下，Gauss-Seidel 法迭代次数显著少于 Jacobi 法迭代，迭代速度较快。为进一步观察两组方法的迭代效果，使用 Mathematica 按色相填充迭代过程中的每个向量，每一次迭代的结果对应图中的一列方格，颜色的冷暖对应分量数值的大小，如图\ref{figure:1}所示，
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \includegraphics[scale = 0.32]{Figure/Jacobi_284.pdf}
+        \caption{Jacobi}
+        \label{figure:Jacobi-1}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \includegraphics[scale = 0.32]{Figure/Gauss_Seidel_151.pdf}
+        \caption{Gauss-Seidel}
+        \label{figure:Gauss-Seidel-1}
+    \end{subfigure}
+    \caption{迭代过程色相图}
+    \label{figure:1}
+\end{figure}
+除了因迭代次数不同两幅色相图的宽度不同外，注意到迭代开始时两者颜色变化速度有着一定差异，为进一步观察，截取两幅色相图左侧 60 格宽度的部分进行对比
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \includegraphics{Figure/Jacobi_60.pdf}
+        \caption{Jacobi 迭代过程色相图前 60 格}
+        \label{figure:Jacobi-2}
+        \label{}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \includegraphics{Figure/Gauss_Seidel_60.pdf}
+        \caption{Gauss-Seidel 迭代过程色相图前 60 格}
+        \label{figure:Gauss-Seidel-2}
+        \label{}
+    \end{subfigure}
+    \caption{迭代过程色相图（部分）}
+    \label{figure:2}
+\end{figure}
+可以较为清晰地注意到，Jacobi 迭代对应色相图开始部分的中部（对应$x^{(k)}_5$附近的分量）有一定长度的绿色（数值较小），而 Gauss-Seidel 迭代则很快变为黄色（数值较大），结合此方程的实际解的数值特征（分量$x^{(k)}_5$、$x^{(k)}_6$最大，分量$x^{(k)}_1$、$x^{(k)}_{10}$最小），这表明相比 Jacobi 迭代，Gauss-Seidel 迭代能够更为快速地收敛到解附近。
 
 \section{算法分析}
+通过对计算结果的分析可知，Gauss-Seidel 迭代在误差控制和收敛速度上均优于 Jacobi 迭代。两者在算法上的主要差异为，Gauss-Seidel 迭代及时使用了更新后的向量分量，从而提升了大部分情况下的算法表现与收敛效果。
+
+另外注意到，计算中使用的停止条件约束了每次迭代前后的向量之差，在计算中包含一定更新信息的 Gauss-Seidel 算法并没有在迭代后期因迭代前后向量差异较小而过早终止，而是将误差控制在一个更好的范围内（相比 Jacobi 迭代）。
 
 \section{实验结论}
+本次实验通过对同一个线性方程组在同一初始及停止条件下使用两种不同的迭代方法进行数值求解，对比了 Jacobi 迭代和 Gauss-Seidel 迭代各自的迭代速度、误差控制。在通常情况下，如果两种迭代均收敛，那么后者有着更好的收敛效果。
+
 
 \end{document}
 
