@@ -1,0 +1,170 @@
+\documentclass[11pt]{article}
+\usepackage[UTF8]{ctex}
+
+\input{../structure.tex}
+
+\newcommand{\assignmentQuestionName}{Question}
+\newcommand{\assignmentClass}{计算方法B}
+\newcommand{\assignmentTitle}{Homework\ \#8}
+\newcommand{\assignmentDate}{2020.5.15}
+\newcommand{\assignmentNo}{PB17000297}
+\newcommand{\assignmentAuthorName}{罗晏宸}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\begin{question}
+
+    \questiontext
+    {
+        给定函数$f(x)$离散值如下：
+        \begin{table}[h]
+            \centering
+            \begin{tabular}{|c|c|c|c|c|c|}
+                \hline
+                $x$    & $1.0$ & $1.2$ & $1.4$ & $1.6$ & $1.8$ \\ \hline
+                $f(x)$ & $3.2$ & $3.5$ & $5.0$ & $5.2$ & $4.8$ \\ \hline
+            \end{tabular}
+        \end{table}
+        分别用复化梯形和复化 Simpson 公式计算$\displaystyle \int_{1.0}^{1.8}{f(x)dx}$。
+    }
+    \answer
+    {
+        题设给定了 5 个数据点，将区间$[1.0, 1.8]$等距分割为 4 等分，设$a = 1.0,\ b = 1.8, h = 0.2$，则
+        $$
+            x_i = a + ih,\quad i = 0,\, 1,\, \cdots,\, 4
+        $$
+        复化梯形积分为
+        \begin{align*}
+            T(h) & = T(0.2) = T_4(f)                                                                              \\
+                 & = h \left[\frac{1}{2}f(a) + \sum_{i = 1}^{3}{f(a + ih)} + \frac{1}{2}f(b)\right]               \\
+                 & = 0.2 \times \left[\frac{1}{2} \times 3.2 + (3.5 + 5.0 + 5.2) + \frac{1}{2} \times 4.8 \right] \\
+                 & = 3.54
+        \end{align*}
+        复化 Simpson 积分为
+        \begin{align*}
+            S_4(f)
+             & = \frac{h}{3} \left[f(a) + 4 \sum_{i = 0}^{1}{f(x_{2i + 1})} + 2\sum_{i = 1}^{1}{f(x_{2i})} + f(b)\right] \\
+             & = \frac{0.2}{3} \times \left[3.2 + 4 \times (3.5 + 5.2) + 2 \times 5.0 + 4.8\right]                       \\
+             & = 3.52
+        \end{align*}
+    }
+\end{question}
+
+\begin{question}
+    \questiontext
+    {
+        构造积分$\bar{I}(f) = \displaystyle \int_{-h}^{2h}{f(x)dx}$的数值积分公式
+        \begin{equation*}
+            I(f) = a_{-1}f(-h) + a_0f(0) + a_1f(2h) \quad (h > 0)
+        \end{equation*}
+        使其具有尽可能高的代数精度，该公式的代数精度是多少？
+    }
+    \answer
+    {
+        取$f(x) = x^k$时，令
+        \begin{align*}
+            \bar{I}(f) & = \int_{-h}^{2h}{x^0dx} = \left(2h - (-h)\right) = a_{-1} + a_0 + a_1 = I(f)      \\
+            \bar{I}(f) & = \int_{-h}^{2h}{x^kdx} = \frac{1}{k + 1}\left((2h)^{k + 1} - (-h)^{k + 1}\right) \\
+                       & = a_{-1}(-h)^k + a_1(2h)^k = I(f),\quad k = 1,\cdots, m
+        \end{align*}
+        这是关于$a_{-1},\, a_0,\, a_1$的线性方程组，理论上由$m = 2$时的 3 个方程即可解得确定值
+        \begin{align*}
+                        & \left\{
+            \begin{aligned}
+                a_{-1} + a_0 + a_1 & = 3h           \\
+                -a_{-1} + 2a_1     & = \frac{3}{2}h \\
+                a_{-1} + 4a_1      & = 3h
+            \end{aligned}
+            \right.               \\
+            \Rightarrow & \left\{
+            \begin{aligned}
+                a_{-1} & = 0            \\
+                a_0    & = \frac{9}{4}h \\
+                a_1    & =\frac{3}{4}h
+            \end{aligned}
+            \right.
+        \end{align*}
+        代入$k = 3$时的方程
+        \begin{equation*}
+            \bar{I}(f) = \int_{-h}^{2h}{x^3dx} = \frac{1}{4}\left((2h)^{4} - (-h)^{4}\right) = \frac{15}{4}h^4 \neq 12h^4 = a_{-1}(-h)^3 + a_1(2h)^3 = I(f)
+        \end{equation*}
+        因此积分$\bar{I}(f) = \displaystyle \int_{-h}^{2h}{f(x)dx}$的数值积分公式
+        \begin{equation*}
+            I(f) = h\left[\frac{9}{4}f(0) + \frac{3}{4}f(2h)\right] \quad (h > 0)
+        \end{equation*}
+        具有最高的 2 阶代数精度。
+    }
+\end{question}
+
+\begin{question}
+    \questiontext
+    {
+        记 $I(f) = \displaystyle \int_{-2}^{2}{f(x)dx}$，设$S\left(f(x)\right)$为其数值积分公式，其中，$I(f) \approx S\left(f(x)\right) = Af(-\alpha) + Bf(0) + Cf(\alpha)$。
+    }
+    \begin{subquestion}{试确定参数$A,\ B,\ C,\ \alpha$，使得该数值积分公式具有尽可能高的代数精度，并求该公式的代数精度（需给出求解过程）}
+        \answer
+        {
+            取$f(x) = x^k$时，令
+            \begin{align*}
+                I(f) & = \int_{-2}^{2}{x^0dx} = \left(2 - (-2)\right) = A + B + C = S\left(f(x)\right) \\
+                I(f) & = \int_{-2}^{2}{x^kdx} = \frac{1}{k + 1}\left(2^{k + 1} - (-2)^{k + 1}\right)   \\
+                     & = A(-\alpha)^k + C\alpha^k = S\left(f(x)\right),\quad k = 1,\cdots, m
+            \end{align*}
+            这是关于$A,\ B,\ C,\ \alpha$的非线性方程组，当$m = 4$时方程组由如下 5 个方程组成
+            \begin{align*}
+                            & \left\{
+                \begin{aligned}
+                    A + B + C                & = 4            \\
+                    -\alpha A + \alpha C     & = 0            \\
+                    \alpha^2 A + \alpha^2 C  & = \frac{16}{3} \\
+                    -\alpha^3 A + \alpha^3 C & = 0            \\
+                    \alpha^4 A + \alpha^4 C  & = \frac{64}{5}
+                \end{aligned}
+                \right.               \\
+                \Rightarrow & \left\{
+                \begin{aligned}
+                    A        & = \frac{10}{9} \\
+                    B        & = \frac{16}{9} \\
+                    C        & = \frac{10}{9} \\
+                    \alpha^2 & = \frac{12}{5}
+                \end{aligned}
+                \right.
+            \end{align*}
+            由数值积分公式形式的对称性，不妨设$\alpha > 0$，即$\alpha = \dfrac{2\sqrt{15}}{5}$。代入$k = 5$及$k = 6$时的方程
+            \begin{align*}
+                I(f) = \int_{-2}^{2}{x^5dx} = 0             & =0= \alpha^6(-A + C) = S\left(f(x)\right)                             \\
+                I(f) = \int_{-2}^{2}{x^6dx} = \frac{256}{7} & \neq \frac{1728}{125} = A(-\alpha)^6 + C\alpha^6 = S\left(f(x)\right)
+            \end{align*}
+            因此$I(f) = \displaystyle \int_{-2}^{2}{f(x)dx}$的数值积分公式
+            \begin{equation*}
+                S\left(f(x)\right) = \frac{10}{9}f\left(-\frac{2\sqrt{15}}{5}\right) + \frac{16}{9}f(0) + \frac{10}{9}f\left(\frac{2\sqrt{15}}{5}\right)
+            \end{equation*}
+            具有最高的 5 阶代数精度。
+        }
+    \end{subquestion}
+    \begin{subquestion}{设$f(x)$足够光滑（可微），求该数值积分公式的误差}
+        \answer
+        {
+            对于给定的被积函数$f(x)$在$[-2, 2]$上的点列$\left\{-\dfrac{2\sqrt{15}}{5},\, 0,\, \dfrac{2\sqrt{15}}{5}\right\}$，作 Lagrange 插值多项式 $L_2(x)$，由数值积分公式有 5 阶代数精度，其误差就是对插值误差函数的积分
+            \begin{align*}
+                E_2(f) = \int_{-2}^{2}{R_2(x)dx} = \frac{1}{6}\int_{-2}^{2}{f'''(\xi)\left(x + \frac{2\sqrt{15}}{5}\right)x\left(x - \frac{2\sqrt{15}}{5}\right)dx}
+            \end{align*}
+            注意到这里$\xi = \xi(x) \in [-2, 2]$是$x$的函数，由积分第一中值定理
+            \begin{align*}
+                E_2(f) & = \frac{1}{6}\left(\int_{-2}^{-\frac{2\sqrt{15}}{5}} + \int_{-\frac{2\sqrt{15}}{5}}^{0} + \int_{0}^{\frac{2\sqrt{15}}{5}} + \int_{\frac{2\sqrt{15}}{5}}^{2}\right){\left[f'''(\xi)\left(x + \frac{2\sqrt{15}}{5}\right)x\left(x - \frac{2\sqrt{15}}{5}\right)dx\right]} \\
+                       & = \frac{f'''(\eta_1)}{6}\int_{-2}^{-\frac{2\sqrt{15}}{5}}{\left[\left(x + \frac{2\sqrt{15}}{5}\right)x\left(x - \frac{2\sqrt{15}}{5}\right)dx\right]}                                                                                                                   \\
+                       & \phantom{1+1+1+1} +\frac{\eta_2f'''(\eta_2)}{6}\int_{-\frac{2\sqrt{15}}{5}}^{\frac{2\sqrt{15}}{5}}{\left[\left(x + \frac{2\sqrt{15}}{5}\right)\left(x - \frac{2\sqrt{15}}{5}\right)dx\right]}                                                                           \\
+                       & \phantom{1+1+1+1} + \frac{f'''(\eta_3)}{6}\int_{\frac{2\sqrt{15}}{5}}^{2}{\left[\left(x + \frac{2\sqrt{15}}{5}\right)x\left(x - \frac{2\sqrt{15}}{5}\right)dx\right]}                                                                                                   \\
+                       & = \frac{f'''(\eta_1)}{6} \times \left(- \frac{16}{25}\right) + \frac{\eta_2f'''(\eta_2)}{6} \times \left(-\frac{32\sqrt{15}}{25}\right) + \frac{f'''(\eta_3)}{6} \times \frac{16}{25}                                                                                   \\
+                       & = \frac{8}{75}\left(- f'''(\eta_1) - 2\sqrt{15}\eta_2f'''(\eta_2) + f'''(\eta_3) \right),\quad \eta_1,\, \eta_2,\, \eta_3 \in [-2, 2]
+            \end{align*}
+        }
+    \end{subquestion}
+\end{question}
+\end{document}
