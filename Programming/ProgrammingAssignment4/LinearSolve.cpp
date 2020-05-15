@@ -199,7 +199,7 @@ public:
     }
 
     // 输出矩阵，使用一个参数 width 指定每个元素的位宽，默认为 5
-    void print(int width = 5)
+    void print(int width = 5, int width_b = 2)
     {
         if (_isAugmented == false)
             Matrix<T>::print(width); // 默认形式输出矩阵
@@ -209,7 +209,7 @@ public:
             {
                 for (int j = 0; j < Matrix<T>::column - 1; j++)
                     cout << setw(width) << Matrix<T>::data[i * Matrix<T>::column + j];
-                cout << " |" << setw(width) << Matrix<T>::data[i * Matrix<T>::column + Matrix<T>::column - 1];
+                cout << " |" << setw(width_b) << Matrix<T>::data[i * Matrix<T>::column + Matrix<T>::column - 1];
                 cout << endl;
             }
             return;
@@ -279,11 +279,11 @@ int main()
     M.print(3);
     cout << endl;
     vector<valarray<double>> Recurrence_Jacobi = JacobiMethod(M, x0, 1E-5);
-    cout << "k = " << Recurrence_Jacobi.size() - 1 << endl;
+    cout << "Jacobi 迭代, k = " << Recurrence_Jacobi.size() - 1 << endl;
     for (auto x : Recurrence_Jacobi.back())
         printf("%.10E\n", x);
     vector<valarray<double>> Recurrence_GaussSeidel = GaussSeidelMethod(M, x0, 1E-5);
-    cout << "k = " << Recurrence_GaussSeidel.size() - 1 << endl;
+    cout << "Gauss-Seidel 迭代, k = " << Recurrence_GaussSeidel.size() - 1 << endl;
     for (auto x : Recurrence_GaussSeidel.back())
         printf("%.10E\n", x);
     // Coefficient_Matrix<double> M({{2, -1, -1}, {1, 5, -1}, {1, 1, 10}}, {-5, 8, 11});
