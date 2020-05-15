@@ -197,7 +197,16 @@
             \begin{equation*}
                 (D + L)x = -Ux + b
             \end{equation*}
-            记$Q = U + L$，构造迭代形式
+            记分裂矩阵
+            \begin{equation*}
+                Q = D + L =
+                \begin{pmatrix}
+                    \phantom{-}5 & \phantom{-}0 & \phantom{-}0 \\
+                    -3           & \phantom{-}5 & \phantom{-}0 \\
+                    \phantom{-}2 & \phantom{-}2 & \phantom{-}7
+                \end{pmatrix}
+            \end{equation*}
+            构造迭代形式
             \begin{equation*}
                 Qx^{(k + 1)} = -Ux^{(k)} + b
             \end{equation*}
