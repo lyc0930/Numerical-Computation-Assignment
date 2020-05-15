@@ -222,22 +222,22 @@ public:
 vector<valarray<double>> JacobiMethod(Coefficient_Matrix<double> M, valarray<double> x0, double epsilon)
 {
 
-    vector<valarray<double>> x = {x0};
-    valarray<double> x2(x0);
+    vector<valarray<double>> x = {};
+    valarray<double> x_next(x0);
     do
     {
+        x.push_back(x_next);
         for (int i = 1; i <= M.height(); i++)
         {
             double s = 0;
             for (int j = 1; j <= M.height(); j++)
                 s += M.A(i, j) * x.back()[j - 1];
-            x2[i - 1] = (M.b(i) - s + M.A(i, i) * x.back()[i - 1]) / M.A(i, i);
+            x_next[i - 1] = (M.b(i) - s + M.A(i, i) * x.back()[i - 1]) / M.A(i, i);
         }
-        // for (auto x : x2)
+        // for (auto x : x_next)
         //     printf("%.10E ", x);
         // cout << endl;
-        x.push_back(x2);
-    } while (abs(x.at(x.size() - 2) - x.back()).max() > epsilon);
+    } while (abs(x_next - x.back()).max() > epsilon);
     return x;
 }
 
@@ -245,22 +245,22 @@ vector<valarray<double>> JacobiMethod(Coefficient_Matrix<double> M, valarray<dou
 vector<valarray<double>> GaussSeidelMethod(Coefficient_Matrix<double> M, valarray<double> x0, double epsilon)
 {
 
-    vector<valarray<double>> x = {x0};
-    valarray<double> x2(x0);
+    vector<valarray<double>> x = {};
+    valarray<double> x_next(x0);
     do
     {
+        x.push_back(x_next);
         for (int i = 1; i <= M.height(); i++)
         {
             double s = 0;
             for (int j = 1; j <= M.height(); j++)
-                s += M.A(i, j) * x2[j - 1];
-            x2[i - 1] = (M.b(i) - s + M.A(i, i) * x.back()[i - 1]) / M.A(i, i);
+                s += M.A(i, j) * x_next[j - 1];
+            x_next[i - 1] = (M.b(i) - s + M.A(i, i) * x.back()[i - 1]) / M.A(i, i);
         }
-        // for (auto x : x2)
+        // for (auto x : x_next)
         //     printf("%.10E ", x);
         // cout << endl;
-        x.push_back(x2);
-    } while (abs(x.at(x.size() - 2) - x.back()).max() > epsilon);
+    } while (abs(x_next - x.back()).max() > epsilon);
     return x;
 }
 
@@ -279,11 +279,19 @@ int main()
     M.print(3);
     cout << endl;
     vector<valarray<double>> Recurrence_Jacobi = JacobiMethod(M, x0, 1E-5);
-    cout << "k = " << Recurrence_Jacobi.size() << endl;
+    cout << "k = " << Recurrence_Jacobi.size() - 1 << endl;
     for (auto x : Recurrence_Jacobi.back())
         printf("%.10E\n", x);
-    vector<valarray<double>> Recurrence_GaussSeidel = GaussSeidelMethod(M, x0, 1E-2);
-    cout << "k = " << Recurrence_GaussSeidel.size() << endl;
+    vector<valarray<double>> Recurrence_GaussSeidel = GaussSeidelMethod(M, x0, 1E-5);
+    cout << "k = " << Recurrence_GaussSeidel.size() - 1 << endl;
     for (auto x : Recurrence_GaussSeidel.back())
         printf("%.10E\n", x);
+    // Coefficient_Matrix<double> M({{2, -1, -1}, {1, 5, -1}, {1, 1, 10}}, {-5, 8, 11});
+    // M.print();
+    // cout << endl;
+    // vector<valarray<double>> Recurrence_Jacobi = JacobiMethod(M, {1, 1, 1}, 1E-2);
+    // cout << "k = " << Recurrence_Jacobi.size() << endl;
+    // for (auto x : Recurrence_Jacobi.back())
+    //     printf("%.10E\n", x);
+    return 0;
 }
