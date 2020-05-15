@@ -43,9 +43,47 @@
 
 取初始迭代 $x^{(0)} = (0, 0, \cdots, 0)^\mathbf{T}$、停止条件 $\left\Arrowvert x^{(k + 1)} - x^{(k)} \right\Arrowvert_{\infty} \leqslant 10^{-5}$，请输出各自的迭代次数以及最终的数值解。通过本次实验，讨论并比较两种迭代方法的优缺点（比如收敛速度等等），给出实验小结。
 
-
 \section{计算结果}
 
+由 C++ 通过两种迭代方式计算得到数值解如表所示，
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{.49\textwidth}
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline $x^{(k)}_1$    & $9.9999301572\text{E}{+}000$ \\
+            \hline $x^{(k)}_2$    & $1.7999865973\text{E}{+}001$ \\
+            \hline $x^{(k)}_3$    & $2.3999812646\text{E}{+}001$ \\
+            \hline $x^{(k)}_4$    & $2.7999774498\text{E}{+}001$ \\
+            \hline $x^{(k)}_5$    & $2.9999754619\text{E}{+}001$ \\
+            \hline $x^{(k)}_6$    & $2.9999754619\text{E}{+}001$ \\
+            \hline $x^{(k)}_7$    & $2.7999774498\text{E}{+}001$ \\
+            \hline $x^{(k)}_8$    & $2.3999812646\text{E}{+}001$ \\
+            \hline $x^{(k)}_9$    & $1.7999865973\text{E}{+}001$ \\
+            \hline $x^{(k)}_{10}$ & $9.9999301572\text{E}{+}000$ \\
+            \hline
+        \end{tabular}
+        \caption{Jacobi 迭代数值解}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline $x^{(k)}_1$    & $9.9999590139\text{E}{+}000$ \\
+            \hline $x^{(k)}_2$    & $1.7999924534\text{E}{+}001$ \\
+            \hline $x^{(k)}_3$    & $2.3999898781\text{E}{+}001$ \\
+            \hline $x^{(k)}_4$    & $2.7999883107\text{E}{+}001$ \\
+            \hline $x^{(k)}_5$    & $2.9999877954\text{E}{+}001$ \\
+            \hline $x^{(k)}_6$    & $2.9999882898\text{E}{+}001$ \\
+            \hline $x^{(k)}_7$    & $2.7999896744\text{E}{+}001$ \\
+            \hline $x^{(k)}_8$    & $2.3999917687\text{E}{+}001$ \\
+            \hline $x^{(k)}_9$    & $1.7999943501\text{E}{+}001$ \\
+            \hline $x^{(k)}_{10}$ & $9.9999717504\text{E}{+}000$ \\
+            \hline
+        \end{tabular}
+        \caption{Gauss-Seidel 迭代数值解}
+    \end{subfigure}
+\end{figure}
+其中 Jacobi 迭代次数为 284 次，Gauss-Seidel 迭代次数为 151。
 \section{结果分析}
 
 \section{算法分析}
