@@ -1,0 +1,42 @@
+\documentclass[11pt]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{subcaption}
+\input{../structure.tex}
+
+\sisetup
+{
+    table-format = +1.12e+003,
+}
+
+\newcommand{\assignmentQuestionName}{Question} % The word to be used as a prefix to question numbers; example alternatives: Problem, Exercise
+\newcommand{\assignmentClass}{计算方法B} % Course/class
+\newcommand{\assignmentTitle}{Programming Assignment\ \#5}
+\newcommand{\assignmentDate}{2020.5.19} % date
+\newcommand{\assignmentNo}{PB17000297}
+\newcommand{\assignmentAuthorName}{罗晏宸} % Student name
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+\assignmentSection{复化积分}
+\section{问题描述}
+分别编写用复化 Simpson 积分公式和复化梯形积分公式计算积分的通用程序。
+
+用如上程序计算积分 $I(f) = \displaystyle \int_0^8\sin{(x)}dx$。取等距节点，记节点$\{x_i,\ i = 0,\,\cdots,\,N\}$，其中$N$为$\left\{2^k,\ k = 0,\,1,\,\cdots,\,10\right\}$，并计算误差（用科学计数形式），同时给出误差阶（用浮点形式，比如$1.8789$）。比较并分析两种方法的优劣。
+
+\paragraph{误差阶} 记步长为$h$时的误差为$\widetilde{e}$，步长为$h/n$时的误差为$\widetilde{e}_n$（这里$n = 2$），则相应的误差阶为：
+\begin{equation*}
+    d = - \frac{\ln{\left(\dfrac{\widetilde{e}_n}{\widetilde{e}}\right)}}{\ln{(n)}}
+\end{equation*}
+\section{计算结果}
+
+\section{结果分析}
+
+\section{算法分析}
+
+\section{实验结论}
+
+\end{document}
