@@ -61,12 +61,14 @@ int main()
         cout << "复化 Simpson 积分，误差和误差阶为：" << endl;
         vector<double> Error = {abs(accuracy - SimpsonsRule(Sin, a, b, pow(2, 0)))}; // 误差
         vector<double> Order;                                                        // 误差阶
-        printf("k = %2d , e = %.12E\n", 0, Error.back());
+        // printf("k = %2d , e = %.12E\n", 0, Error.back());
+        printf("$k = \\phantom{1}%2d$ & $e_{%d\\phantom{1}} = %.12E$ & \\\\ \\hline \n", 0, 0, Error.back());
         for (int k = 1; k <= N; k++)
         {
             Error.push_back(abs(accuracy - SimpsonsRule(Sin, a, b, pow(2, k))));
             Order.push_back(-log(Error[k] / Error[k - 1]) / log(2));
-            printf("k = %2d , e = %.12E , d = %f\n", k, Error.back(), Order.back());
+            // printf("k = %2d , e = %.12E , d = %f\n", k, Error.back(), Order.back());
+            printf("$k = \\phantom{1}%2d$ & $e_{%d\\phantom{1}} = %.12E$ & $d_{%d\\phantom{1}} = %f$\\\\ \\hline \n", k, k, Error.back(), k, Order.back());
         }
     }
     return 0;

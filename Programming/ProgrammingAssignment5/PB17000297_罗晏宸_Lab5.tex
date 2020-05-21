@@ -25,18 +25,100 @@
 \section{问题描述}
 分别编写用复化 Simpson 积分公式和复化梯形积分公式计算积分的通用程序。
 
-用如上程序计算积分 $I(f) = \displaystyle \int_0^8\sin{(x)}dx$。取等距节点，记节点$\{x_i,\ i = 0,\,\cdots,\,N\}$，其中$N$为$\left\{2^k,\ k = 0,\,1,\,\cdots,\,10\right\}$，并计算误差（用科学计数形式），同时给出误差阶（用浮点形式，比如$1.8789$）。比较并分析两种方法的优劣。
+用如上程序计算积分 $I(f) = \displaystyle \int_0^8\!\sin{(x)}\,\text{d}x$。取等距节点，记节点$\{x_i,\ i = 0,\,\cdots,\,N\}$，其中$N$为$\left\{2^k,\ k = 0,\,1,\,\cdots,\,10\right\}$，并计算误差（用科学计数形式），同时给出误差阶（用浮点形式，比如$1.8789$）。比较并分析两种方法的优劣。
 
 \paragraph{误差阶} 记步长为$h$时的误差为$\widetilde{e}$，步长为$h/n$时的误差为$\widetilde{e}_n$（这里$n = 2$），则相应的误差阶为：
 \begin{equation*}
     d = - \frac{\ln{\left(\dfrac{\widetilde{e}_n}{\widetilde{e}}\right)}}{\ln{(n)}}
 \end{equation*}
+
 \section{计算结果}
+由 C++ 计算得到结果按格式输出并列表如下，
+\begin{figure}[h]
+    % \centering
+    % \begin{subfigure}{\textwidth}
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline
+                           & 误差                                              & 误差阶                        \\ \hline
+        $k = \phantom{1}0$ & $e_{0\phantom{1}} = 2.811932952685\text{E}{+}000$ &                               \\\hline
+        $k = \phantom{1}1$ & $e_{1\phantom{1}} = 2.193993521794\text{E}{+}000$ & $d_{1\phantom{1}} = 0.358003$ \\   \hline
+        $k = \phantom{1}2$ & $e_{2\phantom{1}} = 4.099829205476\text{E}{-}001$ & $d_{2\phantom{1}} = 2.419924$ \\   \hline
+        $k = \phantom{1}3$ & $e_{3\phantom{1}} = 9.708816025468\text{E}{-}002$ & $d_{3\phantom{1}} = 2.078197$ \\   \hline
+        $k = \phantom{1}4$ & $e_{4\phantom{1}} = 2.396461540682\text{E}{-}002$ & $d_{4\phantom{1}} = 2.018390$ \\   \hline
+        $k = \phantom{1}5$ & $e_{5\phantom{1}} = 5.972370007437\text{E}{-}003$ & $d_{5\phantom{1}} = 2.004530$ \\   \hline
+        $k = \phantom{1}6$ & $e_{6\phantom{1}} = 1.491925067877\text{E}{-}003$ & $d_{6\phantom{1}} = 2.001128$ \\   \hline
+        $k = \phantom{1}7$ & $e_{7\phantom{1}} = 3.729084041566\text{E}{-}004$ & $d_{7\phantom{1}} = 2.000282$ \\   \hline
+        $k = \phantom{1}8$ & $e_{8\phantom{1}} = 9.322254870159\text{E}{-}005$ & $d_{8\phantom{1}} = 2.000070$ \\   \hline
+        $k = \phantom{1}9$ & $e_{9\phantom{1}} = 2.330535267947\text{E}{-}005$ & $d_{9\phantom{1}} = 2.000018$ \\   \hline
+        $k = 10$           & $e_{10} = 5.826320388591\text{E}{-}006$           & $d_{10} = 2.000004$           \\ \hline
+    \end{tabular}
+    \caption{复化梯形积分误差及误差阶}
+    \label{table:Trapezoid}
+\end{figure}
+% \end{subfigure}
+% \\[5em]
+% \begin{subfigure}{\textwidth}
+\begin{figure}[h]
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline
+                            & 误差                                              & 误差阶                                   \\ \hline
+        $k = \phantom{1} 0$ & $e_{0\phantom{1}} = 1.492788623854\text{E}{+}000$ &                                          \\ \hline
+        $k = \phantom{1} 1$ & $e_{1\phantom{1}} = 3.862635679953\text{E}{+}000$ & $d_{1\phantom{1}} = -1.371576$           \\ \hline
+        $k = \phantom{1} 2$ & $e_{2\phantom{1}} = 1.846872798678\text{E}{-}001$ & $d_{2\phantom{1}} = \phantom{-}4.386429$ \\ \hline
+        $k = \phantom{1} 3$ & $e_{3\phantom{1}} = 7.210093176285\text{E}{-}003$ & $d_{3\phantom{1}} = \phantom{-}4.678923$ \\ \hline
+        $k = \phantom{1} 4$ & $e_{4\phantom{1}} = 4.098995424706\text{E}{-}004$ & $d_{4\phantom{1}} = \phantom{-}4.136676$ \\ \hline
+        $k = \phantom{1} 5$ & $e_{5\phantom{1}} = 2.504512568935\text{E}{-}005$ & $d_{5\phantom{1}} = \phantom{-}4.032669$ \\ \hline
+        $k = \phantom{1} 6$ & $e_{6\phantom{1}} = 1.556578642870\text{E}{-}006$ & $d_{6\phantom{1}} = \phantom{-}4.008079$ \\ \hline
+        $k = \phantom{1} 7$ & $e_{7\phantom{1}} = 9.715041615621\text{E}{-}008$ & $d_{7\phantom{1}} = \phantom{-}4.002014$ \\ \hline
+        $k = \phantom{1} 8$ & $e_{8\phantom{1}} = 6.069783342610\text{E}{-}009$ & $d_{8\phantom{1}} = \phantom{-}4.000503$ \\ \hline
+        $k = \phantom{1} 9$ & $e_{9\phantom{1}} = 3.793281244668\text{E}{-}010$ & $d_{9\phantom{1}} = \phantom{-}4.000127$ \\ \hline
+        $k = 10$            & $e_{10} = 2.370814655706\text{E}{-}011$           & $d_{10} = \phantom{-}3.999992$           \\ \hline
+    \end{tabular}
+    \caption{复化 Simpson 积分误差及误差阶}
+    \label{table:Simpson}
+    % \end{subfigure}
+\end{figure}
 
 \section{结果分析}
+从误差结果来看，随着积分区间节点数的增加，两种复化积分的误差都逐渐减小，但复化 Simpson 积分的误差随着节点数的增加明显小于复化梯形积分的误差；从误差阶结果来看，两种复化积分的误差阶分别趋近于常数 2 和 4，由定义
+\begin{equation*}
+    d = - \frac{\ln{\left(\dfrac{\widetilde{e}_n}{\widetilde{e}}\right)}}{\ln{(n)}} = \log_n{\left(\dfrac{\widetilde{e}}{\widetilde{e}_n}\right)}
+\end{equation*}
+误差阶实际上指出了数值积分的误差下降速度对区间数$n$的对数，计算结果表明复化梯形积分的误差下降速度大致为 $n^{-2}$，而复化 Simpson 积分的误差下降速度大致为 $n^{-4}$。
 
 \section{算法分析}
+对于复化梯形数值积分，截断误差由
+$$
+    E_n(f) = I(f) - T_n(f) = -\frac{h^3}{12}\sum_{i = 0}^{n - 1}{f''(\xi_i)}
+$$
+给出，因为$\sin{x} \in C^2[0, 8]$，所以存在$\xi \in [0, 8]$，有
+\begin{align*}
+    E_n(\sin) & = -\frac{h^3}{12}\sum_{i = 0}^{n - 1}{\sin''(\xi_i)} \\
+              & = \frac{h^3}{12} n \sin(\xi)                         \\
+              & = \frac{h^2}{12} (8 - 0) \sin(\xi)                   \\
+              & = \frac{2h^2}{3}\sin(\xi)                            \\
+              & = \frac{128}{3n^2}\sin(\xi)                          \\
+\end{align*}
+由此可见复化梯形积分误差的截断误差按$h^2$（或$\dfrac{1}{n^2}$）的下降速度下降。
+
+对于复化 Simpson 数值积分，设$n = 2m$，所以存在$\zeta \in [0, 8]$，有
+\begin{align*}
+    E_n(f) & = I(f) - S_n(f)                                                                                                                                     \\
+           & = \sum_{i = 0}^{m - 1}\int_{x_{2i}}^{x_{2i+2}}\!f(x)\,\text{d}x - S_n(f)                                                                            \\
+           & = \sum_{i = 0}^{m - 1}\left\{\frac{2h}{6}\left[f(x_{2i}) + 4f(x_{2i+1}) + f(x_{2i+2})\right] - \frac{(2h)^5}{2880}f^{(4)}(\zeta_i)\right\} - S_n(f) \\
+           & = \sum_{i = 0}^{m - 1}\left\{- \frac{(2h)^5}{2880}f^{(4)}(\zeta_i)\right\}                                                                          \\
+           & = - \frac{(2h)^5}{2880}\sum_{i = 0}^{m - 1}f^{(4)}(\zeta_i)                                                                                         \\
+           & = - \frac{(2h)^5}{2880} m \sin(\zeta)                                                                                                               \\
+           & = - \frac{2h^4}{45}\sin(\zeta)                                                                                                                      \\
+           & = - \frac{8192}{45n^4}\sin(\zeta)
+\end{align*}
+由此可见复化 Simpson 积分误差的截断误差按$h^4$（或$\dfrac{1}{n^4}$）的下降速度下降。
+
+结合计算结果，两组数据的误差阶都与理论值符合地较好。
 
 \section{实验结论}
+实验通过对同一区间上正弦函数的数值积分计算，比较了复化梯形积分和复化 Simpson 积分两种方法的计算结果、数值误差及其误差阶。通常情况下，数值积分公式的代数精度越高，计算精度也越高，复化 Simpson 积分的误差较复化梯形积分小，近似效果较好。
 
 \end{document}
