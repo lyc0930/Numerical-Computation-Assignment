@@ -1,0 +1,232 @@
+\documentclass[11pt]{article}
+\usepackage[UTF8]{ctex}
+
+\input{../structure.tex}
+
+\newcommand{\assignmentQuestionName}{Question}
+\newcommand{\assignmentClass}{计算方法B}
+\newcommand{\assignmentTitle}{Homework\ \#9}
+\newcommand{\assignmentDate}{2020.5.23}
+\newcommand{\assignmentNo}{PB17000297}
+\newcommand{\assignmentAuthorName}{罗晏宸}
+\usepackage{xspace}
+
+% Add a period to the end of an abbreviation unless there's one
+% already, then \xspace.
+\makeatletter
+\DeclareRobustCommand\onedot{\futurelet\@let@token\@onedot}
+\def\@onedot{\ifx\@let@token.\else.\null\fi\xspace}
+\def\ie{\emph{i.e}\onedot}
+\makeatother
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\begin{question}
+
+    \questiontext
+    {
+        给定函数$f(x)$的离散值表，
+        \begin{table}[h]
+            \centering
+            \begin{tabular}{|c|c|c|c|c|}
+                \hline
+                $x$    & $0.00$ & $0.02$ & $0.04$ & $0.06$ \\ \hline
+                $f(x)$ & $6.0$  & $4.0$  & $2.0$  & $8.0$  \\ \hline
+            \end{tabular}
+        \end{table}
+        分别用向前、向后及中心差商公式计算$f'(0.02)$，$f'(0.04)$。
+    }
+    \answer
+    {
+        由一阶向前差商公式
+        \begin{equation*}
+            f'(x_{n}) \approx \frac{f(x_{n + 1}) - f(x_{n})}{x_{n + 1} - x_{n}}
+        \end{equation*}
+        可得
+        \begin{align*}
+            f'(0.02) & \approx \frac{f(0.04) - f(0.02)}{0.04 - 0.02} \\
+                     & = \frac{2.0 - 4.0}{0.02}                      \\
+                     & = -100                                        \\
+            \\
+            f'(0.04) & \approx \frac{f(0.06) - f(0.04)}{0.06 - 0.04} \\
+                     & = \frac{8.0 - 2.0}{0.02}                      \\
+                     & = 300
+        \end{align*}
+        由一阶向后差商公式
+        \begin{equation*}
+            f'(x_{n + 1}) \approx \frac{f(x_{n + 1}) - f(x_{n})}{x_{n + 1} - x_{n}}
+        \end{equation*}
+        可得
+        \begin{align*}
+            f'(0.02) & \approx \frac{f(0.02) - f(0.00)}{0.02 - 0.00} \\
+                     & = \frac{4.0 - 6.0}{0.02}                      \\
+                     & = -100                                        \\
+            \\
+            f'(0.04) & \approx \frac{f(0.04) - f(0.02)}{0.04 - 0.02} \\
+                     & = \frac{2.0 - 4.0}{0.02}                      \\
+                     & = -100
+        \end{align*}
+        由一阶中心差商公式
+        \begin{equation*}
+            f'(x_n) \approx \frac{f(x_{n + 1}) - f(x_{n - 1})}{x_{n + 1} - x_{n - 1}}
+        \end{equation*}
+        可得
+        \begin{align*}
+            f'(0.02) & \approx \frac{f(0.04) - f(0.00)}{0.04 - 0.00} \\
+                     & = \frac{2.0 - 6.0}{0.04}                      \\
+                     & = -100                                        \\
+            \\
+            f'(0.04) & \approx \frac{f(0.06) - f(0.02)}{0.06 - 0.02} \\
+                     & = \frac{8.0 - 4.0}{0.04}                      \\
+                     & = 100
+        \end{align*}
+    }
+\end{question}
+
+\begin{question}
+    \questiontext
+    {
+        求积分$\displaystyle \int_{0}^{1}\!x^2f(x)\,\text{d}x$的 2 点 Gauss 积分公式，这里 $x^2$ 为权重函数。
+    }
+    \answer
+    {
+        利用 Gram-Schmidt 正交化
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                p_0(x) & = f_0(x)                                                                                                                                                         \\
+                p_1(x) & = f_1(x) - \frac{\left(f_1(x),\, p_0(x)\right)}{\left(p_0(x),\, p_0(x)\right)}p_0(x)                                                                             \\
+                p_2(x) & = f_2(x) - \frac{\left(f_2(x),\, p_0(x)\right)}{\left(p_0(x),\, p_0(x)\right)}p_0(x) - \frac{\left(f_2(x),\, p_1(x)\right)}{\left(p_1(x),\, p_1(x)\right)}p_1(x)
+            \end{aligned}
+            \right.
+        \end{equation*}
+        可由$\mathbb{P}_n$的一组基$\{1,\, x,\, \cdots,\, x^n\}$依次求出正交多项式序列：
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                p_0(x) & = 1                                                                                                                                                                                                                                                                                                                                                                                                       \\
+                p_1(x) & = x - \frac{\displaystyle \int_{0}^{1}\!x^2 \cdot x \cdot 1 \,\text{d}x}{\displaystyle \int_{0}^{1}\!x^2 \cdot 1 \cdot 1 \,\text{d}x} \cdot 1 = x - \frac{3}{4}                                                                                                                                                                                                                                           \\
+                p_2(x) & = x^2 - \frac{\displaystyle \int_{0}^{1}\!x^2 \cdot x^2 \cdot 1 \,\text{d}x}{\displaystyle \int_{0}^{1}\!x^2 \cdot 1 \cdot 1 \,\text{d}x} \cdot 1 - \frac{\displaystyle \int_{0}^{1}\!x^2 \cdot x^2 \cdot \left(x - \frac{3}{4}\right) \,\text{d}x}{\displaystyle \int_{0}^{1}\!x^2 \cdot \left(x - \frac{3}{4}\right) \cdot \left(x - \frac{3}{4}\right) \,\text{d}x} \cdot \left(x - \frac{3}{4}\right) \\
+                       & = x^2 - \frac{4}{3}x + \frac{2}{5}
+            \end{aligned}
+            \right.
+        \end{equation*}
+        $p_2(x)$的两个零点为$x_1 = \dfrac{10 - \sqrt{10}}{15},\, x_2 = \dfrac{10 + \sqrt{10}}{15}$，积分系数为
+        \begin{align*}
+            \alpha_1 & = \int_{0}^{1}\!x^2I_1(x)\,\text{d}x = \int_{0}^{1}\!x^2\frac{x - x_2}{x_1 - x_2}\,\text{d}x = \frac{8 - \sqrt{10}}{48} \\
+            \alpha_2 & = \int_{0}^{1}\!x^2I_2(x)\,\text{d}x = \int_{0}^{1}\!x^2\frac{x - x_1}{x_2 - x_1}\,\text{d}x = \frac{8 + \sqrt{10}}{48}
+        \end{align*}
+        因此两点 Gauss 公式为
+        \begin{align*}
+            \int_{0}^{1}\!x^2f(x)\,\text{d}x \approx & G_2(f)                                                                                                                            \\
+            =                                        & \sum_{i = 1}^{2}\alpha_if(x_i)                                                                                                    \\
+            =                                        & \frac{8 - \sqrt{10}}{48}f\left(\frac{10 - \sqrt{10}}{15}\right) + \frac{8 + \sqrt{10}}{48}f\left(\frac{10 + \sqrt{10}}{15}\right)
+        \end{align*}
+
+    }
+\end{question}
+
+\begin{question}
+    \questiontext
+    {
+        设有常微分初值问题
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                y'(x) & = - y(x) ,\qquad (0 \leqslant x \leqslant 1) \\
+                y(0)  & = 1
+            \end{aligned}
+            \right.
+        \end{equation*}
+        假设求解区间$[0, 1]$被 $n$ 等分（$n$充分大），令$h = \dfrac{1}{n},\ x_k = \dfrac{k}{n}\ (k = 0,\, 1,\, \cdots,\, n)$
+    }
+    \begin{subquestion}{分别写出用向前 Euler 公式，向后 Euler 公式，梯形格式以及改进的 Euler 公式求上述微分方程数值解时的差分格式（即分别写出此四种方法/公式下，$y_{k + 1}$与$y_k$之间的递推关系式）}
+        \answer
+        {
+            向前 Euler 公式
+            \begin{equation*}
+                y_{k + 1} = y_{k} + hf(x_{k},\, y_{k}) = y_{k} - \frac{1}{n}y_{k} = \frac{n - 1}{n}y_{k}
+            \end{equation*}
+            向后 Euler 公式
+            \begin{align*}
+                y_{k + 1}             & = y_{k} + hf(x_{k + 1},\, y_{k + 1}) = y_{k} - \frac{1}{n}y_{k + 1} \\
+                \Rightarrow y_{k + 1} & = \frac{n}{n + 1}y_{k}
+            \end{align*}
+            梯形公式
+            \begin{align*}
+                y_{k + 1}             & = y_{k} + \frac{h}{2}\left(f(x_{k},\, y_{k}) + f(x_{k + 1},\, y_{k + 1})\right) = y_{k} - \frac{1}{2n}\left(y_{k} + y_{k + 1}\right) \\
+                \Rightarrow y_{k + 1} & = \frac{2n - 1}{2n + 1}y_{k}
+            \end{align*}
+            改进的 Euler 公式
+            \begin{align*}
+                y_{k + 1}             & = y_{k} + \frac{h}{2}\left(f(x_{k},\, y_{k}) + f(x_{k + 1},\, y_{k} + hf(x_{k}, y_{k}))\right) = y_{k} - \frac{1}{2n}\left(y_{k} + \frac{n + 1}{n}y_{k}\right) \\
+                \Rightarrow y_{k + 1} & = \frac{2n^2 - 2n - 1}{2n^2}y_{k}
+            \end{align*}
+        }
+    \end{subquestion}
+    \begin{subquestion}{设$y_0 = y(0)$，分别求此四种公式（方法）下的近似$y_n$的表达式（注：这里的$y_n$即是$y(x_n) \equiv y(1)$的近似值）}
+        \answer
+        {
+            由$y_0 = y(0) = 1$，由向前 Euler 公式下递推式可得
+            \begin{align*}
+                y_{n} = \frac{n - 1}{n}y_{n - 1} = \cdots = \left(\frac{n - 1}{n}\right)^{n}y_{0} = \left(\frac{n - 1}{n}\right)^{n}
+            \end{align*}
+            同理对于向后 Euler 公式
+            \begin{align*}
+                y_{n} = \left(\frac{n}{n + 1}\right)^{n}
+            \end{align*}
+            梯形公式
+            \begin{align*}
+                y_{n} = \left(\frac{2n - 1}{2n + 1}\right)^{n}
+            \end{align*}
+            改进的 Euler 公式
+            \begin{align*}
+                y_{n} = \left(\frac{2n^2 - 2n - 1}{2n^2}\right)^{n}
+            \end{align*}
+        }
+    \end{subquestion}
+    \begin{subquestion}{当$n$充分大（即区间长度$h \rightarrow 0$）时，分别判断四种方法下的近似值$y_n$是否收敛到原问题的真解$y(x)$在$x = 1$处的值（\ie $y(1)$）}
+        \answer
+        {
+
+            可由
+            \begin{align*}
+                y'(x) = -y(x)                                                 \\
+                \Rightarrow \frac{\text{d}y}{\text{d}x} = -y                  \\
+                \Rightarrow \frac{1}{y}\text{d}y = -\text{d}x                 \\
+                \Rightarrow \int\!\frac{1}{y}\,\text{d}y = \int\!-\,\text{d}x \\
+                \Rightarrow \ln y = -x + C'                                   \\
+                \Rightarrow y = e^{-x} + C
+            \end{align*}
+            代入$y(0) = 1$可得$C = 0$，即原问题
+            \begin{equation*}
+                \left\{
+                \begin{aligned}
+                    y'(x) & = - y(x) ,\qquad (0 \leqslant x \leqslant 1) \\
+                    y(0)  & = 1
+                \end{aligned}
+                \right.
+            \end{equation*}
+            的解为
+            \begin{equation*}
+                y(x) = e^{-x}
+            \end{equation*}
+
+            其在$x = 1$处的值$y(1) = e^{-1}$。当$n$充分大（即区间长度$h \rightarrow 0$）时，有
+            \begin{align*}
+                 & \lim_{n \rightarrow \infty}\left(\frac{n - 1}{n}\right)^{n} = \lim_{n \rightarrow \infty}\left(1 - \frac{1}{n}\right)\frac{1}{\left(1 + \dfrac{1}{n - 1}\right)^{n - 1}} = \frac{1}{e}                            \\
+                 & \lim_{n \rightarrow \infty}\left(\frac{n}{n + 1}\right)^{n} = \lim_{n \rightarrow \infty}\frac{1}{\left(1 + \dfrac{1}{n}\right)^{n}} = \frac{1}{e}                                                                \\
+                 & \lim_{n \rightarrow \infty}\left(\frac{2n - 1}{2n + 1}\right)^{n} = \lim_{n \rightarrow \infty}\sqrt{\frac{2n - 1}{2n + 1}}\frac{1}{\left(1 + \dfrac{1}{n - \frac{1}{2}}\right)^{n - \frac{1}{2}}} =  \frac{1}{e} \\
+                 & \lim_{n \rightarrow \infty}\left(\frac{2n^2 - 2n - 1}{2n^2}\right)^{n} = \frac{1}{e}
+            \end{align*}
+            因此四种方法都收敛到真解在$x = 1$处的值
+        }
+    \end{subquestion}
+\end{question}
+\end{document}
