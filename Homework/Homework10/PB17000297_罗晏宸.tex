@@ -1,0 +1,89 @@
+\documentclass[11pt]{article}
+\usepackage[UTF8]{ctex}
+
+\input{../structure.tex}
+
+\newcommand{\assignmentQuestionName}{Question}
+\newcommand{\assignmentClass}{计算方法B}
+\newcommand{\assignmentTitle}{Homework\ \#10}
+\newcommand{\assignmentDate}{2020.5.26}
+\newcommand{\assignmentNo}{PB17000297}
+\newcommand{\assignmentAuthorName}{罗晏宸}
+\usepackage{xspace}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\begin{question}
+
+    \questiontext
+    {
+        试推导例题 7.4 （第 3 版教材 151-152 页）中的差分格式
+        $$
+            y_{n + 1} = y_{n - 1} + \frac{h}{3}\left[7f(x_{n}, y_{n}) - 2f(x_{n - 1}, y_{n - 1}) + f(x_{n - 2}, y_{n - 2})\right]
+        $$
+        的局部截断误差，即验证
+        \begin{equation*}
+            T_{n + 1} \equiv y(x_{n + 1}) - y_{n + 1} = \frac{1}{3}h^4y^{(4)}(x_{n - 1}) + O(h^5)
+        \end{equation*}
+    }
+    \answer
+    {
+    依微分方程
+    \begin{equation*}
+        \left\{
+        \begin{aligned}
+            y'(x) & = f(x, y) \\
+            y(a)  & = y_0
+        \end{aligned}
+        \right.
+        \qquad a \leqslant x \leqslant b
+    \end{equation*}
+    有
+    \begin{equation*}
+        y_{n + 1} = y(x_{n - 1}) + \frac{h}{3}\left[7y'(x_{n}) - 2y'(x_{n - 1}) + y'(x_{n - 2})\right]
+    \end{equation*}
+    将此式在$x_n$处作 Taylor 展开，有
+    $$
+        f(x) = \displaystyle \sum _{n=0}^{\infty }{\frac {f^{(n)}(a)}{n!}}(x-a)^{n}
+    $$
+    \begin{align*}
+        y_{n + 1} = & \sum_{k = 0}^{\infty}\frac{y^{(k)}(x_{n})}{k!}(x_{n - 1} - x_{n})^k + \frac{h}{3}\Bigg[7y'(x_{n})                                                                            \\
+                    & - 2\sum_{k = 0}^{\infty}\frac{y^{(k + 1)}(x_{n})}{k!}(x_{n - 1} - x_{n})^k + \sum_{k = 0}^{\infty}\frac{y^{(k + 1)}(x_{n})}{k!}(x_{n - 2} - x_{n})^k\Bigg]                   \\
+        =           & \sum_{k = 0}^{\infty}\frac{y^{(k)}(x_{n})}{k!}(-h)^k + \frac{7h}{3}y'(x_{ n})                                                                                                \\
+                    & + \frac{h}{3}\Bigg[- 2\sum_{k = 0}^{\infty}\frac{y^{(k + 1)}(x_{n})}{k!}(-h)^k + \sum_{k = 0}^{\infty}\frac{y^{(k + 1)}(x_{n})}{k!}(-2h)^k\Bigg]                             \\
+        =           & \sum_{k = 0}^{\infty}\frac{(-1)^k h^k}{k!}y^{(k)}(x_{n}) + \frac{7h}{3}y'(x_{ n})                                                                                            \\
+                    & + \frac{h}{3}\Bigg[- 2\sum_{k = 1}^{\infty}\frac{(-1)^{k - 1}kh^{k - 1}}{k!}y^{(k)}(x_{n}) + \sum_{k = 1}^{\infty}\frac{(-2)^{k - 1} kh^{k - 1}}{k!}y^{(k)}(x_{n})\Bigg]     \\
+        =           & y(x_{n}) + \left(-h + \frac{7h}{3} + \frac{h}{3}\times (-2 + 1)\right)y'(x_{ n}) + \sum_{k = 2}^{\infty}\frac{\left(3 - (2^{k - 1} - 2)k\right)(-1)^kh^k}{3k!}y^{(k)}(x_{n}) \\
+        =           & y(x_{n}) + hy'(x_{n}) + \sum_{k = 2}^{\infty}\frac{\left(3 - (2^{k - 1} - 2)k\right)(-1)^kh^k}{3k!}y^{(k)}(x_{n})                                                            \\
+    \end{align*}
+    而$y(x_{n + 1})$在$x_{n}$处的 Taylor 展开式为
+    \begin{equation*}
+        y(x_{n + 1}) = \sum_{k = 0}^{\infty}\frac{y^{(k)}(x_{n})}{k!}(x_{n + 1} - x_{n})^k = y(x_{n}) + hy'(x_{n}) + \sum_{k = 2}^{\infty}\frac{h^k}{k!}y^{(k)}(x_{n})
+    \end{equation*}
+    故有
+    \begin{align*}
+        T_{n + 1} & \equiv y(x_{n + 1}) - y_{n + 1}                                                                                           \\
+                  & = \sum_{k = 2}^{\infty}\left(\frac{h^k}{k!} - \frac{\left(3 - (2^{k - 1} - 2)k\right)(-1)^kh^k}{3k!}\right)y^{(k)}(x_{n}) \\
+                  & = \frac{1}{3}h^4y^{(4)}(x_{n - 1}) + O(h^5)                                                                               \\
+    \end{align*}
+    }
+\end{question}
+
+\begin{question}
+    \questiontext
+    {
+        试用线性多步法构造$p = 1,\, q = 2$时的隐式差分格式，求该格式局部截断误差的误差主项并判断它的阶（即精度），最后为该隐式格式设计一种合适的预估-校正格式。
+    }
+    \answer
+    {
+
+    }
+\end{question}
+
+\end{document}
