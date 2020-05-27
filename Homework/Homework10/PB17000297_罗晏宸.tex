@@ -34,44 +34,55 @@
     }
     \answer
     {
-    依微分方程
-    \begin{equation*}
-        \left\{
-        \begin{aligned}
-            y'(x) & = f(x, y) \\
-            y(a)  & = y_0
-        \end{aligned}
-        \right.
-        \qquad a \leqslant x \leqslant b
-    \end{equation*}
-    有
-    \begin{equation*}
-        y_{n + 1} = y(x_{n - 1}) + \frac{h}{3}\left[7y'(x_{n}) - 2y'(x_{n - 1}) + y'(x_{n - 2})\right]
-    \end{equation*}
-    将此式在$x_n$处作 Taylor 展开，有
-    $$
-        f(x) = \displaystyle \sum _{n=0}^{\infty }{\frac {f^{(n)}(a)}{n!}}(x-a)^{n}
-    $$
-    \begin{align*}
-        y_{n + 1} = & \sum_{k = 0}^{\infty}\frac{y^{(k)}(x_{n})}{k!}(x_{n - 1} - x_{n})^k + \frac{h}{3}\Bigg[7y'(x_{n})                                                                            \\
-                    & - 2\sum_{k = 0}^{\infty}\frac{y^{(k + 1)}(x_{n})}{k!}(x_{n - 1} - x_{n})^k + \sum_{k = 0}^{\infty}\frac{y^{(k + 1)}(x_{n})}{k!}(x_{n - 2} - x_{n})^k\Bigg]                   \\
-        =           & \sum_{k = 0}^{\infty}\frac{y^{(k)}(x_{n})}{k!}(-h)^k + \frac{7h}{3}y'(x_{ n})                                                                                                \\
-                    & + \frac{h}{3}\Bigg[- 2\sum_{k = 0}^{\infty}\frac{y^{(k + 1)}(x_{n})}{k!}(-h)^k + \sum_{k = 0}^{\infty}\frac{y^{(k + 1)}(x_{n})}{k!}(-2h)^k\Bigg]                             \\
-        =           & \sum_{k = 0}^{\infty}\frac{(-1)^k h^k}{k!}y^{(k)}(x_{n}) + \frac{7h}{3}y'(x_{ n})                                                                                            \\
-                    & + \frac{h}{3}\Bigg[- 2\sum_{k = 1}^{\infty}\frac{(-1)^{k - 1}kh^{k - 1}}{k!}y^{(k)}(x_{n}) + \sum_{k = 1}^{\infty}\frac{(-2)^{k - 1} kh^{k - 1}}{k!}y^{(k)}(x_{n})\Bigg]     \\
-        =           & y(x_{n}) + \left(-h + \frac{7h}{3} + \frac{h}{3}\times (-2 + 1)\right)y'(x_{ n}) + \sum_{k = 2}^{\infty}\frac{\left(3 - (2^{k - 1} - 2)k\right)(-1)^kh^k}{3k!}y^{(k)}(x_{n}) \\
-        =           & y(x_{n}) + hy'(x_{n}) + \sum_{k = 2}^{\infty}\frac{\left(3 - (2^{k - 1} - 2)k\right)(-1)^kh^k}{3k!}y^{(k)}(x_{n})                                                            \\
-    \end{align*}
-    而$y(x_{n + 1})$在$x_{n}$处的 Taylor 展开式为
-    \begin{equation*}
-        y(x_{n + 1}) = \sum_{k = 0}^{\infty}\frac{y^{(k)}(x_{n})}{k!}(x_{n + 1} - x_{n})^k = y(x_{n}) + hy'(x_{n}) + \sum_{k = 2}^{\infty}\frac{h^k}{k!}y^{(k)}(x_{n})
-    \end{equation*}
-    故有
-    \begin{align*}
-        T_{n + 1} & \equiv y(x_{n + 1}) - y_{n + 1}                                                                                           \\
-                  & = \sum_{k = 2}^{\infty}\left(\frac{h^k}{k!} - \frac{\left(3 - (2^{k - 1} - 2)k\right)(-1)^kh^k}{3k!}\right)y^{(k)}(x_{n}) \\
-                  & = \frac{1}{3}h^4y^{(4)}(x_{n - 1}) + O(h^5)                                                                               \\
-    \end{align*}
+        依微分方程
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                y'(x) & = f(x, y) \\
+                y(a)  & = y_0
+            \end{aligned}
+            \right.
+            \qquad a \leqslant x \leqslant b
+        \end{equation*}
+        有
+        \begin{equation*}
+            y_{n + 1} = y(x_{n - 1}) + \frac{h}{3}\left[7y'(x_{n}) - 2y'(x_{n - 1}) + y'(x_{n - 2})\right]
+        \end{equation*}
+        将此式在$x_{n - 1}$处作 Taylor 展开，有
+        \begin{align*}
+            y_{n + 1} = & y(x_{n - 1}) + \frac{h}{3}\Bigg[7\sum_{k = 0}^{\infty}\frac{y^{(k + 1)}(x_{n - 1})}{k!}(x_{n    } - x_{n - 1})^k - 2y'(x_{n - 1})                                                                      \\
+                        & + \sum_{k = 0}^{\infty}\frac{y^{(k + 1)}(x_{n - 1})}{k!}(x_{n - 2} - x_{n - 1})^k\Bigg]                                                                                                                \\
+            =           & y(x_{n - 1}) - \frac{2h}{3}y'(x_{n - 1}) + \frac{7}{3}\sum_{k = 1}^{\infty}\frac{h^k}{(k - 1)!}y^{(k)}(x_{n - 1}) + \frac{1}{3}\sum_{k = 1}^{\infty}\frac{(-1)^{k - 1}h^k}{(k - 1)!}y^{(k)}(x_{n - 1}) \\
+            =           & y(x_{n - 1}) + 2hy'(x_{n - 1}) + \sum_{k = 2}^{\infty}\frac{\left((-1)^{k - 1} + 7\right)h^k}{3(k - 1)!}y^{(k)}(x_{n - 1})
+        \end{align*}
+        而$y(x_{n + 1})$在$x_{n - 1}$处的 Taylor 展开式为
+        \begin{align*}
+            y(x_{n + 1}) = & \sum_{k = 0}^{\infty}\frac{y^{(k)}(x_{n})}{k!}(x_{n + 1} - x_{n - 1})^k                   \\
+            =              & y(x_{n - 1}) + 2hy'(x_{n - 1}) + \sum_{k = 2}^{\infty}\frac{(2h)^k}{k!}y^{(k)}(x_{n - 1})
+        \end{align*}
+        % 将此式在$x_n$处作 Taylor 展开，有
+        % \begin{align*}
+        %     y_{n + 1} = & \sum_{k = 0}^{\infty}\frac{y^{(k)}(x_{n})}{k!}(x_{n - 1} - x_{n})^k + \frac{h}{3}\Bigg[7y'(x_{n})                                                                            \\
+        %                 & - 2\sum_{k = 0}^{\infty}\frac{y^{(k + 1)}(x_{n})}{k!}(x_{n - 1} - x_{n})^k + \sum_{k = 0}^{\infty}\frac{y^{(k + 1)}(x_{n})}{k!}(x_{n - 2} - x_{n})^k\Bigg]                   \\
+        %     =           & \sum_{k = 0}^{\infty}\frac{y^{(k)}(x_{n})}{k!}(-h)^k + \frac{7h}{3}y'(x_{ n})                                                                                                \\
+        %                 & + \frac{h}{3}\Bigg[- 2\sum_{k = 0}^{\infty}\frac{y^{(k + 1)}(x_{n})}{k!}(-h)^k + \sum_{k = 0}^{\infty}\frac{y^{(k + 1)}(x_{n})}{k!}(-2h)^k\Bigg]                             \\
+        %     =           & \sum_{k = 0}^{\infty}\frac{(-1)^k h^k}{k!}y^{(k)}(x_{n}) + \frac{7h}{3}y'(x_{ n})                                                                                            \\
+        %                 & + \frac{h}{3}\Bigg[- 2\sum_{k = 1}^{\infty}\frac{(-1)^{k - 1}kh^{k - 1}}{k!}y^{(k)}(x_{n}) + \sum_{k = 1}^{\infty}\frac{(-2)^{k - 1} kh^{k - 1}}{k!}y^{(k)}(x_{n})\Bigg]     \\
+        %     =           & y(x_{n}) + \left(-h + \frac{7h}{3} + \frac{h}{3}\times (-2 + 1)\right)y'(x_{ n}) + \sum_{k = 2}^{\infty}\frac{\left(3 - (2^{k - 1} - 2)k\right)(-1)^kh^k}{3k!}y^{(k)}(x_{n}) \\
+        %     =           & y(x_{n}) + hy'(x_{n}) + \sum_{k = 2}^{\infty}\frac{\left(3 - (2^{k - 1} - 2)k\right)(-1)^kh^k}{3k!}y^{(k)}(x_{n})                                                            \\
+        % \end{align*}
+        % 而$y(x_{n + 1})$在$x_{n}$处的 Taylor 展开式为
+        % \begin{equation*}
+        %     y(x_{n + 1}) = \sum_{k = 0}^{\infty}\frac{y^{(k)}(x_{n})}{k!}(x_{n + 1} - x_{n})^k = y(x_{n}) + hy'(x_{n}) + \sum_{k = 2}^{\infty}\frac{h^k}{k!}y^{(k)}(x_{n})
+        % \end{equation*}
+        故有
+        \begin{align*}
+            T_{n + 1} \equiv & y(x_{n + 1}) - y_{n + 1}                                                                                                                                                \\
+            =                & \sum_{k = 2}^{\infty}\left(\frac{(2h)^k}{k!} - \frac{\left((-1)^{k - 1} + 7\right)h^k}{3(k - 1)!}\right)y^{(k)}(x_{n - 1})                                              \\
+            =                & \left(2h^2 - 2h^2\right)y''(x_{n - 1}) + \left(\frac{4h^3}{3} - \frac{4h^3}{3}\right)y^{(3)}(x_{n - 1}) + \left(\frac{2h^4}{3} - \frac{h^4}{3}\right)y^{(4)}(x_{n - 1}) \\
+                             & + \sum_{k = 5}^{\infty}\frac{\left(3 \times 2^k - k\left((-1)^{k - 1} + 7\right)\right)h^k}{3k!}y^{(k)}(x_{n - 1})                                                      \\
+            =                & \frac{1}{3}h^4y^{(4)}(x_{n - 1}) + O(h^5)
+        \end{align*}
     }
 \end{question}
 
