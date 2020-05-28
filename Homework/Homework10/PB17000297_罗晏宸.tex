@@ -136,7 +136,15 @@
         \end{align*}
         因此该格式是四阶的。
 
-
+        隐格式的计算，可以使用显格式作为初值估计，得到预估-校正公式
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                \bar{y}_{n + 1} & = y_{n - 1} + \frac{h}{3}\left[7f(x_{n}, y_{n}) - 2f(x_{n - 1}, y_{n - 1}) + f(x_{n - 2}, y_{n - 2})\right] \\
+                y_{n + 1}       & = y_{n - 1} + \frac{h}{3}\left[f(x_{n + 1}, y_{n + 1}) + 4f(x_{n}, y_{n}) + f(x_{n - 1}, y_{n - 1})\right]
+            \end{aligned}
+            \right.
+        \end{equation*}
     }
 \end{question}
 
