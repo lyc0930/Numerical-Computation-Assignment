@@ -1,0 +1,54 @@
+\documentclass[11pt]{article}
+\usepackage[UTF8]{ctex}
+
+\input{../structure.tex}
+
+\newcommand{\assignmentQuestionName}{Question}
+\newcommand{\assignmentClass}{计算方法B}
+\newcommand{\assignmentTitle}{Homework\ \#11}
+\newcommand{\assignmentDate}{2020.6.1}
+\newcommand{\assignmentNo}{PB17000297}
+\newcommand{\assignmentAuthorName}{罗晏宸}
+\usepackage{xspace}
+
+\begin{document}
+
+\maketitle
+
+\thispagestyle{empty}
+
+\newpage
+
+\begin{question}
+
+    \questiontext
+    {
+        试推导如下 Runge-Kutta 公式的局部截断误差和精度。
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                y_{n + 1} & = y_{n} + \frac{h}{4}(3k_{1} + k_{2}) \\
+                k_{1}     & = f(x_{n},\, y_{n})                   \\
+                k_{2}     & = f(x_{n} + 2h,\, y_{n} + 2hk_{1})
+            \end{aligned}
+            \right.
+        \end{equation*}
+    }
+    \answer
+    {
+
+    }
+\end{question}
+
+\begin{question}
+    \questiontext
+    {
+        讨论梯形格式 $y_{n + 1} = y_{n} + \displaystyle \frac{h}{2}\left[f(x_{n},\, y_{n}) + f(y_{n + 1},\, y_{n + 1})\right]$ 的绝对稳定性（$h > 0$）。
+    }
+    \answer
+    {
+
+    }
+\end{question}
+
+\end{document}
