@@ -73,6 +73,22 @@
             =\            & O(h^3)
         \end{align*}
         所以题设公式是 2 阶的，即具有 2 阶精度。
+
+        事实上由题设公式可知，公式主体部分有如下的形式
+        \begin{equation*}
+            c_1f(x_{n},\, y_{n}) + c_2f(x_{n} + ah,\, y_{n} + bhf(x_{n},\, y_{n}))
+        \end{equation*}
+        其中$c_1 = \dfrac{3}{4},\ c_2 = \dfrac{1}{4},\, a = 2,\, b = 2$，满足
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                 & c_1 + c_2 = 1 \\
+                 & 2c_2a = 1     \\
+                 & 2c_2b = 1
+            \end{aligned}
+            \right.
+        \end{equation*}
+        因此题设公式是二阶 Runge-Kutta 公式
     }
 \end{question}
 
