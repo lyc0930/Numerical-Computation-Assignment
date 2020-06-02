@@ -99,7 +99,41 @@
     }
     \answer
     {
-
+        计算典型微分方程
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                y'(x) & = \lambda y \\
+                y(a)  & = y_0
+            \end{aligned}
+            \right.
+            \qquad a \leqslant x \leqslant b,\quad \lambda \text{是复数},\quad \operatorname{Re} \lambda < 0.
+        \end{equation*}
+        的题设梯形公式为
+        \begin{equation*}
+            y_{n + 1} = y_{n} + \frac{h}{2}\left(\lambda y_{n} + \lambda y_{n + 1}\right)
+        \end{equation*}
+        若$y_{n}$有误差$\rho_{n}$ ，记 $y_{n}^* = y_{n} + \rho_{n}$，则
+        \begin{align*}
+                          & y_{n + 1}^* = \left(1 + \frac{\lambda h}{2}\right)y_{n}^* + \frac{\lambda h}{2}y_{n + 1}^* \\
+            \Rightarrow\  & y_{n + 1}^* = \frac{2 + \lambda h}{2 - \lambda h}y_{n}^*
+        \end{align*}
+        $y_{n + 1}$有误差$\rho_{n + 1} = y_{n + 1}^* - y_{n + 1}$，误差满足关系式
+        \begin{equation*}
+            \rho_{n + 1} = \frac{2 + \lambda h}{2 - \lambda h}\rho_{n}
+        \end{equation*}
+        或
+        \begin{equation*}
+            \frac{|\rho_{n + 1}|}{|\rho_{n}|} = \left|\frac{2 + \lambda h}{2 - \lambda h}\right|
+        \end{equation*}
+        由于$\operatorname{Re} \lambda < 0$且$h > 0$，有
+        \begin{align*}
+            \frac{|\rho_{n + 1}|}{|\rho_{n}|} & = \left|\frac{2 + \lambda h}{2 - \lambda h}\right|                                                                                                    \\
+                                              & = \frac{\left|2 + \lambda h\right|}{\left|2 - \lambda h\right|}                                                                                       \\
+                                              & = \frac{(2 + h\operatorname{Re} \lambda )^2 + (h\operatorname{Im} \lambda )^2}{(2 - h\operatorname{Re} \lambda )^2 + (h\operatorname{Im} \lambda )^2} \\
+                                              & < 1
+        \end{align*}
+        恒成立，即对任意$h$，恒有$\dfrac{|\rho_{n + 1}|}{|\rho_{n}|} = \left|\dfrac{2 + \lambda h}{2 - \lambda h}\right| < 1$，误差逐次衰减，此格式的绝对稳定区域是整个左半复平面，因此是无条件绝对稳定（ $A$ 稳定）的。
     }
 \end{question}
 
