@@ -36,7 +36,43 @@
     }
     \answer
     {
-
+        将$k_{1}$与$k_{2}$代入$ y_{n + 1} = y_{n} + \displaystyle \frac{h}{4}(3k_{1} + k_{2})$，得到
+        \begin{align*}
+            y_{n + 1} & = y_{n} + \frac{h}{4}\left[3f(x_{n},\, y_{n}) + f(x_{n} + 2h,\, y_{n} + 2hf(x_{n},\, y_{n}))\right]            \\
+                      & = y_{n} + h\left[\frac{3}{4}f(x_{n},\, y_{n}) + \frac{1}{4}f(x_{n} + 2h,\, y_{n} + 2hf(x_{n},\, y_{n}))\right]
+        \end{align*}
+        将此式在$x_{n}$处做 Taylor 展开，得到
+        \begin{align*}
+            y_{n + 1} =\  & y_{n} + h\left[\frac{3}{4}f(x_{n},\, y_{n}) + \frac{1}{4}f(x_{n} + 2h,\, y_{n} + 2hf(x_{n},\, y_{n}))\right] \\
+            =\            & y_{n} + h\bigg\{\frac{3}{4}f(x_{n},\, y_{n}) + \frac{1}{4}\big[f(x_{n},\, y_{n})                             \\
+                          & + 2hf'_x(x_{n},\, y_{n}) + 2hf(x_{n},\, y_{n})f'_y(x_{n},\, y_{n}) + O(h^2)\big]\bigg\}
+        \end{align*}
+        而依微分方程
+        \begin{equation*}
+            \left\{
+            \begin{aligned}
+                y'(x) & = f(x, y) \\
+                y(a)  & = y_0
+            \end{aligned}
+            \right.
+            \qquad a \leqslant x \leqslant b %\tag{1}\label{ODE}
+        \end{equation*}
+        $y(x_{n + 1})$在$x_{n}$处的展开式为
+        \begin{align*}
+            y(x_{n + 1}) & = y(x_{n}) + hy'(x_{n}) + \frac{h^2}{2!}y''(x_{n}) + O(h^3)                                                                        \\
+                         & = y(x_{n}) + hf(x_{n},\, y_{n}) + \frac{h^2}{2!}\left[f'_x(x_{n},\, y_{n}) + f'_y(x_{n},\, y_{n})f(x_{n},\, y_{n})\right] + O(h^3)
+        \end{align*}
+        所以局部截断误差
+        \begin{align*}
+            T_{n + 1} =\  & y(x_{n + 1}) - y_{n + 1}                                                                                                               \\
+            =\            & hf(x_{n},\, y_{n}) + \frac{h^2}{2!}\left[f'_x(x_{n},\, y_{n}) + f'_y(x_{n},\, y_{n})f(x_{n},\, y_{n})\right] + O(h^3)                  \\
+                          & - h\bigg\{\frac{3}{4}f(x_{n},\, y_{n}) + \frac{1}{4}\big[f(x_{n},\, y_{n})                                                             \\
+                          & + 2hf'_x(x_{n},\, y_{n}) + 2hf(x_{n},\, y_{n})f'_y(x_{n},\, y_{n}) + O(h^2)\big]\bigg\}                                                \\
+            =\            & \left(1 - \frac{3}{4} - \frac{1}{4}\right)hf(x_{n},\, y_{n}) + \left(\frac{1}{2!} - \frac{1}{4} \times 2\right)h^2f'_x(x_{n},\, y_{n}) \\
+                          & + h^2\left(\frac{1}{2!} - \frac{1}{4} \times 2\right)f(x_{n},\, y_{n})f'_y(x_{n},\, y_{n}) + \left[O(h^3) - \frac{h}{4}O(h^2)\right]   \\
+            =\            & O(h^3)
+        \end{align*}
+        所以题设公式是 2 阶的，即具有 2 阶精度。
     }
 \end{question}
 
