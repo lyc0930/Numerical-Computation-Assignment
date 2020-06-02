@@ -2,7 +2,9 @@
 #include <cmath>
 #include <cstdio>
 #include <float.h>
+#include <functional>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -33,10 +35,9 @@ double f(double x)
     return 1.0 / (2.0 + 2.0 * x + pow(x, 2));
 }
 
-point *Linear(int n)
+vector<point> Linear(int n)
 {
-    point *Nodes;
-    Nodes = new point[n + 1];
+    vector<point> Nodes(n + 1);
     for (int i = 0; i <= n; i++)
     {
         Nodes[i].x = -5.0 + (10.0 * i) / n;
@@ -45,10 +46,9 @@ point *Linear(int n)
     return Nodes;
 }
 
-point *Chebyshev(int n)
+vector<point> Chebyshev(int n)
 {
-    point *Nodes;
-    Nodes = new point[n + 1];
+    vector<point> Nodes(n + 1);
     for (int i = 0; i <= n; i++)
     {
         Nodes[i].x = -5.0 * cos((2.0 * i + 1.0) * M_PI / (2.0 * n + 2.0));
@@ -57,7 +57,7 @@ point *Chebyshev(int n)
     return Nodes;
 }
 
-double Lagrange(point Nodes[], int n, double x)
+double Lagrange(vector<point> Nodes, int n, double x)
 {
     double estimator = 0;
     for (int i = 0; i <= n; i++)
@@ -76,8 +76,8 @@ double Lagrange(point Nodes[], int n, double x)
 int main()
 {
     int N[] = {4, 8, 16};
-    point *(*InterpolationNodeGenerator[])(int) = {Linear, Chebyshev};
-    for (point *(*NodeGenerator)(int) : InterpolationNodeGenerator)
+    vector<function<vector<point>(int)>> InterpolationNodeGenerator = {Linear, Chebyshev};
+    for (auto NodeGenerator : InterpolationNodeGenerator)
     {
         for (int n : N)
         {
