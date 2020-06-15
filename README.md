@@ -83,7 +83,7 @@ Homework and programming assignments of **Computational Methods B**
 -   常微分方程数值解
     -   Euler 公式
 
-### [Homework 10](https://github.com/lyc0930/Numerical-Computation-Assignment/tree/master/Homework/Homework10) （未批改）
+### [Homework 10](https://github.com/lyc0930/Numerical-Computation-Assignment/tree/master/Homework/Homework10)
 
 5.26
 
@@ -97,6 +97,15 @@ Homework and programming assignments of **Computational Methods B**
 -   常微分方程数值解
     -   Runge-Kutta 公式
     -   绝对稳定性
+
+### [Homework 12](https://github.com/lyc0930/Numerical-Computation-Assignment/tree/master/Homework/Homework12) （未批改）
+
+6.1
+
+-   计算矩阵的特征值与特征向量
+    -   幂法
+    -   反幂法
+    -   基于 Givens 变换的 Jacobi 方法（用于实对称矩阵）
 
 ## Programming Assignment
 
