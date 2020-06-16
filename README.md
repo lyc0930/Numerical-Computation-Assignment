@@ -63,7 +63,7 @@ Homework and programming assignments of **Computational Methods B**
     -   Jacobi 迭代
     -   Gauss-Seidel 迭代
 
-### [Homework 8](https://github.com/lyc0930/Numerical-Computation-Assignment/tree/master/Homework/Homework8)（有误）
+### [Homework 8](https://github.com/lyc0930/Numerical-Computation-Assignment/tree/master/Homework/Homework8)
 
 5.15
 
@@ -90,7 +90,7 @@ Homework and programming assignments of **Computational Methods B**
 -   常微分方程数值解
     -   线性多步法
 
-### [Homework 11](https://github.com/lyc0930/Numerical-Computation-Assignment/tree/master/Homework/Homework11) （未批改）
+### [Homework 11](https://github.com/lyc0930/Numerical-Computation-Assignment/tree/master/Homework/Homework11)
 
 6.1
 
@@ -98,7 +98,7 @@ Homework and programming assignments of **Computational Methods B**
     -   Runge-Kutta 公式
     -   绝对稳定性
 
-### [Homework 12](https://github.com/lyc0930/Numerical-Computation-Assignment/tree/master/Homework/Homework12) （未批改）
+### [Homework 12](https://github.com/lyc0930/Numerical-Computation-Assignment/tree/master/Homework/Homework12)
 
 6.1
 

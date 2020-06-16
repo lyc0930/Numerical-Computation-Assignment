@@ -151,19 +151,28 @@
     \begin{subquestion}{设$f(x)$足够光滑（可微），求该数值积分公式的误差}
         \answer
         {
-            对于给定的被积函数$f(x)$在$[-2, 2]$上的点列$\left\{-\dfrac{2\sqrt{15}}{5},\, 0,\, \dfrac{2\sqrt{15}}{5}\right\}$，作 Lagrange 插值多项式 $L_2(x)$，由数值积分公式有 5 阶代数精度，其误差就是对插值误差函数的积分
+            Gauss 积分误差为
             \begin{align*}
-                E_2(f) = \int_{-2}^{2}\!{R_2(x)\,\text{d}x} = \frac{1}{6}\int_{-2}^{2}\!{f'''(\xi)\left(x + \frac{2\sqrt{15}}{5}\right)x\left(x - \frac{2\sqrt{15}}{5}\right)\,\text{d}x}
+                E_n(f) & = I(f) - S(f)                                                                                         \\
+                       & = \frac{f^{(6)}(\xi)}{6!} \int_{-2}^{2}\!(x - \alpha)^2x^2(x + \alpha)^2\text{d}x                     \\
+                       & = \frac{f^{(6)}(\xi)}{6!} \int_{-2}^{2}\!(x^2 - \alpha^2)^2x^2\text{d}x                               \\
+                       & = \frac{f^{(6)}(\xi)}{6!} \int_{-2}^{2}\!\left(x^2 - \left(\frac{12}{5}\right)^2\right)^2x^2\text{d}x \\
+                       & = \frac{f^{(6)}(\xi)}{6!} \frac{1024}{175}                                                            \\
+                       & = \frac{64}{7875} f^{(6)}(\xi), \quad \xi \in [-2,\ 2]
             \end{align*}
-            注意到这里$\xi = \xi(x) \in [-2, 2]$是$x$的函数，由积分第一中值定理
-            \begin{align*}
-                E_2(f) & = \frac{1}{6}\left(\int_{-2}^{-\frac{2\sqrt{15}}{5}}\! + \int_{-\frac{2\sqrt{15}}{5}}^{0}\! + \int_{0}^{\frac{2\sqrt{15}}{5}}\! + \int_{\frac{2\sqrt{15}}{5}}^{2}\!\right){\left[f'''(\xi)\left(x + \frac{2\sqrt{15}}{5}\right)x\left(x - \frac{2\sqrt{15}}{5}\right)\,\text{d}x\right]} \\
-                       & = \frac{f'''(\eta_1)}{6}\int_{-2}^{-\frac{2\sqrt{15}}{5}}\!{\left[\left(x + \frac{2\sqrt{15}}{5}\right)x\left(x - \frac{2\sqrt{15}}{5}\right)\,\text{d}x\right]}                                                                                                                         \\
-                       & \phantom{1+1+1+1} +\frac{\eta_2f'''(\eta_2)}{6}\int_{-\frac{2\sqrt{15}}{5}}^{\frac{2\sqrt{15}}{5}}\!{\left[\left(x + \frac{2\sqrt{15}}{5}\right)\left(x - \frac{2\sqrt{15}}{5}\right)\,\text{d}x\right]}                                                                                 \\
-                       & \phantom{1+1+1+1} + \frac{f'''(\eta_3)}{6}\int_{\frac{2\sqrt{15}}{5}}^{2}\!{\left[\left(x + \frac{2\sqrt{15}}{5}\right)x\left(x - \frac{2\sqrt{15}}{5}\right)\,\text{d}x\right]}                                                                                                         \\
-                       & = \frac{f'''(\eta_1)}{6} \times \left(- \frac{16}{25}\right) + \frac{\eta_2f'''(\eta_2)}{6} \times \left(-\frac{32\sqrt{15}}{25}\right) + \frac{f'''(\eta_3)}{6} \times \frac{16}{25}                                                                                                    \\
-                       & = \frac{8}{75}\left(- f'''(\eta_1) - 2\sqrt{15}\eta_2f'''(\eta_2) + f'''(\eta_3) \right),\quad \eta_1,\, \eta_2,\, \eta_3 \in [-2, 2]
-            \end{align*}
+            % 对于给定的被积函数$f(x)$在$[-2, 2]$上的点列$\left\{-\dfrac{2\sqrt{15}}{5},\, 0,\, \dfrac{2\sqrt{15}}{5}\right\}$，作 Lagrange 插值多项式 $L_2(x)$，由数值积分公式有 5 阶代数精度，其误差就是对插值误差函数的积分
+            % \begin{align*}
+            %     E_2(f) = \int_{-2}^{2}\!{R_2(x)\,\text{d}x} = \frac{1}{6}\int_{-2}^{2}\!{f'''(\xi)\left(x + \frac{2\sqrt{15}}{5}\right)x\left(x - \frac{2\sqrt{15}}{5}\right)\,\text{d}x}
+            % \end{align*}
+            % 注意到这里$\xi = \xi(x) \in [-2, 2]$是$x$的函数，由积分第一中值定理
+            % \begin{align*}
+            %     E_2(f) & = \frac{1}{6}\left(\int_{-2}^{-\frac{2\sqrt{15}}{5}}\! + \int_{-\frac{2\sqrt{15}}{5}}^{0}\! + \int_{0}^{\frac{2\sqrt{15}}{5}}\! + \int_{\frac{2\sqrt{15}}{5}}^{2}\!\right){\left[f'''(\xi)\left(x + \frac{2\sqrt{15}}{5}\right)x\left(x - \frac{2\sqrt{15}}{5}\right)\,\text{d}x\right]} \\
+            %            & = \frac{f'''(\eta_1)}{6}\int_{-2}^{-\frac{2\sqrt{15}}{5}}\!{\left[\left(x + \frac{2\sqrt{15}}{5}\right)x\left(x - \frac{2\sqrt{15}}{5}\right)\,\text{d}x\right]}                                                                                                                         \\
+            %            & \phantom{1+1+1+1} +\frac{\eta_2f'''(\eta_2)}{6}\int_{-\frac{2\sqrt{15}}{5}}^{\frac{2\sqrt{15}}{5}}\!{\left[\left(x + \frac{2\sqrt{15}}{5}\right)\left(x - \frac{2\sqrt{15}}{5}\right)\,\text{d}x\right]}                                                                                 \\
+            %            & \phantom{1+1+1+1} + \frac{f'''(\eta_3)}{6}\int_{\frac{2\sqrt{15}}{5}}^{2}\!{\left[\left(x + \frac{2\sqrt{15}}{5}\right)x\left(x - \frac{2\sqrt{15}}{5}\right)\,\text{d}x\right]}                                                                                                         \\
+            %            & = \frac{f'''(\eta_1)}{6} \times \left(- \frac{16}{25}\right) + \frac{\eta_2f'''(\eta_2)}{6} \times \left(-\frac{32\sqrt{15}}{25}\right) + \frac{f'''(\eta_3)}{6} \times \frac{16}{25}                                                                                                    \\
+            %            & = \frac{8}{75}\left(- f'''(\eta_1) - 2\sqrt{15}\eta_2f'''(\eta_2) + f'''(\eta_3) \right),\quad \eta_1,\, \eta_2,\, \eta_3 \in [-2, 2]
+            % \end{align*}
         }
     \end{subquestion}
 \end{question}
